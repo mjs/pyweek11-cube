@@ -4,6 +4,7 @@ import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
 
+from .view.camera import Camera
 from .view.render import Render
 from .model.world import World
 from .model.gameitem import GameItem
@@ -20,6 +21,8 @@ class Gameloop(object):
     def prepare(self, options):
         self.world = World()
         self.world.add(GameItem())
+
+        self.camera = Camera()
 
         self.window = Window(
             fullscreen=options.fullscreen,
