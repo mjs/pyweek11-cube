@@ -6,6 +6,7 @@ from pyglet.window import Window
 
 from .view.render import Render
 from .model.world import World
+from .model.gameitem import GameItem
 
 
 class Gameloop(object):
@@ -18,6 +19,7 @@ class Gameloop(object):
 
     def prepare(self, options):
         self.world = World()
+        self.world.add(GameItem())
 
         self.window = Window(
             fullscreen=options.fullscreen,
