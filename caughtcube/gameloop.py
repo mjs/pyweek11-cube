@@ -20,7 +20,7 @@ class Gameloop(object):
     def prepare(self, options):
         self.window = Window(
             fullscreen=options.fullscreen,
-            vsync=False,
+            vsync=options.vsync,
             visible=False,
             resizable=True)
 
