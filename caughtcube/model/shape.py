@@ -6,6 +6,18 @@ from euclid import Vector3
 from ..util.color import Color
 
 
+def tessellate_face(indices):
+    '''
+    Return this face tesselated into a list of triangular faces, expressed
+    as integer indices. The triangles will be wound in the same direction
+    as the original poly. Does not work for concave faces.
+    e.g. Face(verts, [0, 1, 2, 3, 4]) -> [[0, 1, 2], [0, 2, 3], [0, 3, 4]]
+    '''
+    return (
+        [indices[0], indices[index], indices[index + 1]]
+        for index in xrange(1, len(indices) - 1)
+    )
+
 
 class Face(object):
     '''
@@ -16,6 +28,14 @@ class Face(object):
         self.color = color
         self.vertices = vertices
         self.normal = self.get_normal()
+
+
+    def __getitem__(self, index):
+        return self.indices[index]
+
+
+    def __len__(self):
+        return len(self.indices)
 
 
     def get_normal(self):
@@ -32,19 +52,6 @@ class Face(object):
         normal = b.cross(a)
         normal.normalize()
         return normal
-
-
-    def tessellate(self):
-        '''
-        Return this face tesselated into a list of triangular faces, expressed
-        as integer indices. The triangles will be wound in the same direction
-        as the original poly. Does not work for concave faces.
-        e.g. Face(verts, [0, 1, 2, 3, 4]) -> [[0, 1, 2], [0, 2, 3], [0, 3, 4]]
-        '''
-        return (
-            [self.indices[0], self.indices[index], self.indices[index + 1]]
-            for index in xrange(1, len(self.indices) - 1)
-        )
 
 
 

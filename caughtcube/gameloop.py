@@ -5,8 +5,10 @@ from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
 
 from .model.camera import Camera
+from .model.cube import Cube
 from .model.gameitem import GameItem
 from .model.world import World
+from .util.color import Color
 from .util.vectors import origin
 from .view.render import Render
 
@@ -20,9 +22,6 @@ class Gameloop(object):
 
 
     def prepare(self, options):
-        self.world = World()
-        self.world.add(GameItem())
-
         self.window = Window(
             fullscreen=options.fullscreen,
             vsync=options.vsync,
@@ -30,8 +29,19 @@ class Gameloop(object):
             resizable=True)
         self.window.on_draw = self.draw_window
 
+        self.world = World()
         self.camera = Camera((2, 5, 10), origin)
-        self.render = Render(self.window, self.camera)
+        self.render = Render(self.world, self.window, self.camera)
+        self.render.init()
+        
+        # TODO: add a single token unit cube to the world.
+        # Replace this with some proper world populating mechanism
+        self.world.add(
+            GameItem(
+                position=origin,
+                shape=Cube(1, Color.RandomSequence()),
+            )
+        )
 
 
     def run(self):
