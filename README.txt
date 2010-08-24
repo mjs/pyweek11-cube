@@ -81,26 +81,6 @@ Currently runs under Windows at 60fps on my modest 2005-era Thinkpad T60 laptop
 (ATI Radeon X1400).
 
 
-DESIGN NOTES
-------------
-
-The play area consists of a single cuboid rooms, about 20x20x10 high.
-
-The player moves an axis aligned unit cube around on the floor of this volume.
-
-Like all things in the world, the player moves in straight lines along the
-axes, and can only come to rest or change direction at integer ordinates.
-
-There is an exit in the room, defined as a unit cube volume, although this
-will initially be embedded in a wall, just exposing a single face. This face
-is black, bearing the word EXIT in tiny letters (a la gauntlet). When the
-player cube occupies the same position as the exit cube, the player has
-escaped the current room, and moves on to the next.
-
-Obstacles:
- * The player can normally only move on the floor, so raised walls form a maze.
-
-
 THANKS
 ------
 
@@ -109,4 +89,5 @@ which have transformed my hobbyist game coding. We all owe you, big time.
 
 Thanks to Chris DeLeon, for advice, moral support, and examples of how to do it
 right.
+
 
