@@ -34,6 +34,20 @@ class Face(object):
         return normal
 
 
+    def tessellate(self):
+        '''
+        Return this face tesselated into a list of triangular faces, expressed
+        as integer indices. The triangles will be wound in the same direction
+        as the original poly. Does not work for concave faces.
+        e.g. Face(verts, [0, 1, 2, 3, 4]) -> [[0, 1, 2], [0, 2, 3], [0, 3, 4]]
+        '''
+        return (
+            [self.indices[0], self.indices[index], self.indices[index + 1]]
+            for index in xrange(1, len(self.indices) - 1)
+        )
+
+
+
 class Shape(object):
     '''
     Defines a polyhedron, a 3D shape with flat faces and straight edges.
