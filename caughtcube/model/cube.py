@@ -1,3 +1,4 @@
+from __future__ import division
 
 from itertools import product, repeat
 
@@ -5,7 +6,7 @@ from .shape import Shape
 
 
 def Cube(edge, colors=None):
-    e2 = edge / 2.
+    e2 = edge / 2
     verts = list(product(*repeat([-e2, +e2], 3)))
     faces = [
         [0, 1, 3, 2], # left
