@@ -54,8 +54,8 @@ class Shape(object):
         if len(vertices) > 0 and not isinstance(vertices[0], Vector3):
             vertices = [Vector3(*v) for v in vertices]
 
-        # if the shape is one color, construct a sequence of identical
-        # colors to use for its faces
+        # if given one color instead of a sequence of them,
+        # then construct a sequence if identical colors out of it
         if isinstance(colors, Color):
             colors = repeat(colors)
 

@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 
-from caughtcube.main import main
+import sys
+sys.path.append('lib')
 
+from caughtcube.main import main
 main()
 
