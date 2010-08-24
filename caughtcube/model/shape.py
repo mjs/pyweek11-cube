@@ -3,7 +3,7 @@ from itertools import repeat
 
 from euclid import Vector3
 
-from ..utils.color import Color
+from ..util.color import Color
 
 
 

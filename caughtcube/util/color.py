@@ -11,6 +11,7 @@ class Color(namedtuple('ColorBase', 'r g b a')):
     def __repr__(self):
         return 'Color(%d, %d, %d, %d)' %  (self.r, self.g, self.b, self.a)
 
+
     @staticmethod
     def Random():
         return Color(
@@ -18,6 +19,13 @@ class Color(namedtuple('ColorBase', 'r g b a')):
             randint(0, 255),
             randint(0, 255),
             255)
+
+
+    @staticmethod
+    def RandomSequence():
+        while True:
+            yield Color.Random()
+
 
     def tinted(self, other=None, bias=0.5):
         if other is None:
