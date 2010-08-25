@@ -1,5 +1,6 @@
 
 from euclid import Vector3
+from ..util.vectors import origin
 
 
 class GameItem(object):
@@ -10,7 +11,9 @@ class GameItem(object):
         self.id = GameItem._next_id
         GameItem._next_id += 1
 
-        if isinstance(position, tuple):
+        if position is None:
+            position = origin
+        elif not isinstance(position, Vector3):
             position = Vector3(*position)
         self.position = position
 
