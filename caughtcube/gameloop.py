@@ -39,7 +39,7 @@ class Gameloop(object):
         self.camera = GameItem(
             position=(2, 5, 10),
             look_at=self.player,
-            update=orbit,
+            #update=orbit,
         )
         self.world.add(self.camera)
 
@@ -57,13 +57,7 @@ class Gameloop(object):
             self.fpss.append(1/max(1e-6, dt))
         dt = min(dt, 1 / 30)
         self.time += dt
-
-        self.camera.position += Vector3(
-            -sin(self.time),
-            cos(self.time),
-            0,
-        ) * 0.01
-        self.window.invalid = True
+        self.world.update(dt, self.time)
 
 
     def draw_window(self):
