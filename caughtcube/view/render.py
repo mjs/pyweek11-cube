@@ -36,7 +36,7 @@ class Render(object):
         gl.glCullFace(gl.GL_BACK)
         gl.glEnable(gl.GL_CULL_FACE)
 
-        gl.glClearColor(*self.world.clear_color)
+        gl.glClearColor(*self.world.sky_color)
 
         # create glyphs for every item added to the world before now
         for item in self.world:
