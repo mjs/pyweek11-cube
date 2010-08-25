@@ -7,6 +7,7 @@ from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
 
 from .model.camera import Camera
+from .model.shape import MultiShape
 from .model.cube import Cube
 from .model.gameitem import GameItem
 from .model.world import World
@@ -39,10 +40,19 @@ class Gameloop(object):
         
         # TODO: add a single token unit cube to the world.
         # Replace this with some proper world populating mechanism
+        multi = MultiShape()
+        multi.add(
+            shape=Cube(1, Color.RandomSequence()),
+            position=(-1, 0, 0),
+        )
+        multi.add(
+            shape=Cube(1, Color.RandomSequence()),
+            position=(+1, 0, 0),
+        )
         self.world.add(
             GameItem(
                 position=origin,
-                shape=Cube(1, Color.RandomSequence()),
+                shape=multi,
             )
         )
 

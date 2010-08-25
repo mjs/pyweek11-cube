@@ -89,7 +89,7 @@ class Glyph(object):
             gl.GLubyte,
             chain(*glcolors),
             self.num_glvertices * Color.NUM_COMPONENTS) 
-        
+
 
     def get_glnormals(self, vertices, faces):
         glnormals = chain.from_iterable(
