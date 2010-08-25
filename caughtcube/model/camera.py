@@ -1,4 +1,6 @@
 
+from math import cos, sin
+
 from euclid import Vector3
 
 from .gameitem import GameItem
@@ -22,4 +24,12 @@ class Camera(object):
             return self._look_at.position
         else:
             raise TypeError(str(self._look_at))
+
+
+    def update(self):
+        self.position += Vector3(
+            -sin(self.time),
+            cos(self.time),
+            0,
+        ) * 0.01
 

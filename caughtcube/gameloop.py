@@ -1,17 +1,12 @@
 from __future__ import division
-from math import cos, sin
 
-from euclid import Vector3
 import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
 
 from .model.camera import Camera
-from .model.shape import MultiShape
-from .model.cube import Cube
-from .model.gameitem import GameItem
+from .model.player import Player
 from .model.world import World
-from .util.color import Color
 from .util.vectors import origin
 from .view.render import Render
 
@@ -38,24 +33,9 @@ class Gameloop(object):
         self.render = Render(self.world, self.window, self.camera)
         self.render.init()
         
-        # TODO: add a single token unit cube to the world.
-        # Replace this with some proper world populating mechanism
-        multi = MultiShape()
-        multi.add(
-            shape=Cube(1, Color.RandomSequence()),
-            position=(-1, 0, 0),
-        )
-        multi.add(
-            shape=Cube(1, Color.RandomSequence()),
-            position=(+1, 0, 0),
-        )
-        self.world.add(
-            GameItem(
-                position=origin,
-                shape=multi,
-            )
-        )
-
+        self.player = Player()
+        self.world.add(self.player)
+        
 
     def run(self):
         pyglet.clock.schedule(self.update)
@@ -69,11 +49,8 @@ class Gameloop(object):
         dt = min(dt, 1 / 30)
         self.time += dt
 
-        self.camera.position += Vector3(
-            -sin(self.time),
-            cos(self.time),
-            0,
-        ) * 0.01
+        self.world.update(dt, self.time)
+
         self.window.invalid = True
 
 

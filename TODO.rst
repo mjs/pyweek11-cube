@@ -51,10 +51,6 @@ GAMEPLAY
 ENGINE
 ------
 
-* Shapes should be composeable into a multishape for performance. The whole
-  room and any static geometry within it could be a single shape on a single
-  gameitem, for example.
-
 * Add shader with simple directional lighting
 
 
@@ -76,4 +72,7 @@ VERY OPTIONAL or SPECULATIVE
 
 * a single cube is visible
 
+* Shapes should be composeable into a multishape for performance. The whole
+  room and any static geometry within it could be a single shape on a single
+  gameitem, for example.
 
