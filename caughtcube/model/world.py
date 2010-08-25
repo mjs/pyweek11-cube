@@ -1,7 +1,7 @@
 
 from ..util.color import Color
 from ..util.event import Event
-from ..util.vector import round_to_int
+from ..util.vectors import round_to_int
 
 from .collision import Collision
 
