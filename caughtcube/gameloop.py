@@ -9,6 +9,7 @@ from pyglet.window import Window
 from .model.player import Player
 from .model.gameitem import GameItem
 from .model.room import Room
+from .model.wall import Wall
 from .model.world import World
 from .model.move import orbit
 from .view.render import Render
@@ -33,8 +34,11 @@ class Gameloop(object):
 
         self.world = World()
         self.world.add(Room(16))
-        self.player = Player(position=(0, 1, 0))
+        self.player = Player()
         self.world.add(self.player)
+
+        #right, up, close
+        self.world.add(Wall(1.5, 2, (-2, 0.5, -4), 0))
 
         self.camera = GameItem(
             position=(2, 5, 10),
