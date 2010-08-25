@@ -95,6 +95,9 @@ class Shape(object):
             for face, color in zip(faces, colors)
         ]
 
+    def __repr__(self):
+        return '<Shape %d verts, %d faces>' % (len(self.vertices), len(self.faces),)
+
 
 class MultiShape(object):
     '''

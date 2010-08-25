@@ -1,15 +1,14 @@
 
 from ..util.color import white
-from ..util.vectors import origin
 from .gameitem import GameItem
 from .cube import Cube
 
 
-def Player():
+def Player(**kwargs):
     return GameItem(
-        position=origin,
         shape=Cube(1, white),
         update=directed_motion(),
+        **kwargs
     )
 
 
@@ -19,5 +18,6 @@ class directed_motion(object):
         self.moving_to = None
 
     def __call__(self, item, dt, time):
-        print item, dt, time
+        pass #print item, dt, time
+
 
