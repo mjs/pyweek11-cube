@@ -322,7 +322,7 @@ class Vector3:
                    self.y == other[1] and \
                    self.z == other[2]
 
-    def __neq__(self, other):
+    def __ne__(self, other):
         return not self.__eq__(other)
 
     def __nonzero__(self):
