@@ -40,7 +40,6 @@ class Render(object):
 
         # create glyphs for every item added to the world before now
         for item in self.world:
-            print item
             self.world_add_item(item)
         # create glyphs for every item added after this
         self.world.item_added += self.world_add_item

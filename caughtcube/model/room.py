@@ -1,7 +1,5 @@
 from __future__ import division
 
-from itertools import product, repeat
-
 from ..model.gameitem import GameItem
 from ..model.shape import Shape
 from ..util.color import all_colors
@@ -9,7 +7,16 @@ from ..util.color import all_colors
 
 def RoomShape(edge, colors):
     e = edge / 2
-    verts = list(product(*repeat([-e, +e], 3)))
+    verts = [
+        (-e/2 - 0.5,        0.5, -e/2 - 0.5,),
+        (-e/2 - 0.5,        0.5, +e/2 + 0.5,),
+        (-e/2 - 0.5, +e/2 + 0.5, -e/2 - 0.5,),
+        (-e/2 - 0.5, +e/2 + 0.5, +e/2 + 0.5,),
+        (+e/2 + 0.5,        0.5, -e/2 - 0.5,),
+        (+e/2 + 0.5,        0.5, +e/2 + 0.5,),
+        (+e/2 + 0.5, +e/2 + 0.5, -e/2 - 0.5,),
+        (+e/2 + 0.5, +e/2 + 0.5, +e/2 + 0.5,),
+    ]
     faces = [
         [2, 3, 1, 0],
         [5, 7, 6, 4],

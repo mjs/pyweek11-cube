@@ -32,8 +32,8 @@ class Gameloop(object):
         self.window.on_draw = self.draw_window
 
         self.world = World()
-        self.world.add(Room(32))
-        self.player = Player()
+        self.world.add(Room(16))
+        self.player = Player(position=(0, 1, 0))
         self.world.add(self.player)
 
         self.camera = GameItem(
@@ -58,12 +58,7 @@ class Gameloop(object):
         dt = min(dt, 1 / 30)
         self.time += dt
 
-        self.camera.position += Vector3(
-            -sin(self.time),
-            cos(self.time),
-            0,
-        ) * 0.01
-        self.window.invalid = True
+        self.world.update(dt, self.time)
 
 
     def draw_window(self):
