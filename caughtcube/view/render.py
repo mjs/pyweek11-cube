@@ -39,7 +39,8 @@ class Render(object):
         gl.glClearColor(*self.world.clear_color)
 
         # create glyphs for every item added to the world before now
-        for item in self.world.items:
+        for item in self.world:
+            print item
             self.world_add_item(item)
         # create glyphs for every item added after this
         self.world.item_added += self.world_add_item
@@ -49,7 +50,9 @@ class Render(object):
         '''
         convert the given item's shape into a glyph, for rendering
         '''
-        if item.shape and not (hasattr(item, 'glyph') and item.glyph):
+        if hasattr(item, 'shape') and not (
+            hasattr(item, 'glyph') and item.glyph
+        ):
             item.glyph = Glyph.FromShape(item.shape)
 
 
