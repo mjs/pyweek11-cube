@@ -25,6 +25,6 @@ class World(object):
 
     def update(self, dt, time):
         for item in self.items.itervalues():
-            if item.update:
-                item.update(dt, time)
+            if hasattr(item, 'update'):
+                item.update(item, dt, time)
 

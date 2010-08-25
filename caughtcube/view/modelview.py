@@ -18,7 +18,7 @@ class ModelView(object):
         gl.glMatrixMode(gl.GL_MODELVIEW)
         gl.glLoadIdentity()
         position = self.camera.position
-        look_at = self.camera.look_at
+        look_at = self.camera.look_at.position
         glu.gluLookAt(
             position.x, position.y, position.z,
             look_at.x, look_at.y, look_at.z,

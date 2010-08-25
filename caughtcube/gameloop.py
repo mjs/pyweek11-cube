@@ -4,10 +4,10 @@ import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
 
-from .model.camera import Camera
+from .model.gameitem import GameItem
 from .model.player import Player
 from .model.world import World
-from .util.vectors import origin
+from .model.move import orbit
 from .view.render import Render
 
 
@@ -29,12 +29,19 @@ class Gameloop(object):
         self.window.on_draw = self.draw_window
 
         self.world = World()
-        self.camera = Camera((2, 5, 10), origin)
-        self.render = Render(self.world, self.window, self.camera)
-        self.render.init()
-        
+
         self.player = Player()
         self.world.add(self.player)
+
+        self.camera = GameItem(
+            position=(2, 5, 10),
+            look_at=self.player,
+            update=orbit,
+        )
+        self.world.add(self.camera)
+
+        self.render = Render(self.world, self.window, self.camera)
+        self.render.init()
         
 
     def run(self):
