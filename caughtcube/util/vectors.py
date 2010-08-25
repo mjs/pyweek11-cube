@@ -20,3 +20,9 @@ def round_to_int(v):
         floor(v.z + 0.5),
     )
 
+def round_down_to_int(v):
+    return Vector3(
+        floor(v.x),
+        floor(v.y),
+        floor(v.z),
+    )

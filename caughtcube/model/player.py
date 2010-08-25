@@ -1,8 +1,9 @@
 
 from ..util.color import white
 from ..util.vectors import origin
-from .gameitem import GameItem
 from .cube import Cube
+from .gameitem import GameItem
+from .move import directed_motion
 
 
 def Player():
@@ -12,12 +13,4 @@ def Player():
         update=directed_motion(),
     )
 
-
-class directed_motion(object):
-
-    def __init__(self):
-        self.moving_to = None
-
-    def __call__(self, item, dt, time):
-        print item, dt, time
 

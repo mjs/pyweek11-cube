@@ -11,7 +11,7 @@ def run_game():
         gameloop = Gameloop(options)
         gameloop.prepare(options)
 
-        keyhandler = KeyHandler(gameloop.world)
+        keyhandler = KeyHandler(gameloop.world, gameloop.player)
         gameloop.window.push_handlers(keyhandler.on_key_press)
 
         gameloop.run()
