@@ -8,10 +8,8 @@ from pyglet.window import Window
 
 from .model.camera import Camera
 from .model.player import Player
-from .model.gameitem import GameItem
 from .model.room import Room
 from .model.world import World
-from .util.color import Color
 from .util.vectors import origin
 from .view.render import Render
 
