@@ -35,6 +35,9 @@ GAMEPLAY
    * Gate, shaped like a nasty pointy portcullis, and a button in the floor
      that opens it
    * Things that chase the player? Rolling balls? Pacman-ghost shapes?
+     (random thought: Should we give up and just write 3D rendered 'pacman',
+     with occasional gameplay tweaks to exploit third dimension? It does fit
+     in with the 'caught' theme.)
    * A lift. Toggles up, down when you stand on it.
    * a power-up that makes the player leave a trail. This enables them to
      press several buttons at once.
