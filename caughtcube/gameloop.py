@@ -32,8 +32,8 @@ class Gameloop(object):
         self.window.on_draw = self.draw_window
 
         self.world = World()
-        self.world.add(Room(32))
-        self.player = Player()
+        self.world.add(Room(16))
+        self.player = Player(position=(0, 1, 0))
         self.world.add(self.player)
 
         self.camera = GameItem(

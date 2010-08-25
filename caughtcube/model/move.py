@@ -6,11 +6,11 @@ from euclid import Vector3
 from ..util.vectors import round_down_to_int
 
 def orbit(item, dt, time):
-    item.position += Vector3(
+    item.position = Vector3(
         -sin(time),
-        cos(time),
-        0,
-    ) * 0.01
+        4 + cos(time),
+        4,
+    ) * 2
 
 
 class directed_motion(object):
