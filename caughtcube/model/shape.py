@@ -1,11 +1,12 @@
 
-from itertools import repeat
+from itertools import izip, repeat
 
-from euclid import Vector3
+from euclid import Matrix4, Vector3
 
 from ..util.color import Color
 
 
+# TODO (very low priority): make this a method of 'face'.
 def tessellate_face(indices):
     '''
     Return this face tesselated into a list of triangular faces, expressed
@@ -61,6 +62,14 @@ class Shape(object):
     Each vertex defines a point in 3d space. Each face is a list of integer
     indices into the vertex array, forming a coplanar convex ring defining the
     face's edges. Each face has its own color.
+
+    public interface to a Shape is:
+        shape.vertices = [vector3, vector3, vector3...]
+        shape.faces = [
+            Face(vertices, color1, [1, 2, 3, 4]),
+            Face(vertices, color2, [4, 5, 1, 9]),
+            ...
+        ]
     '''    
     def __init__(self, vertices, faces, colors):
 
@@ -85,4 +94,53 @@ class Shape(object):
             Face(face, color, vertices)
             for face, color in zip(faces, colors)
         ]
+
+
+
+class MultiShape(object):
+    '''
+    A composite of multiple Shapes. This allows many shapes to be stuck
+    together in a single MultiShape, which is then attached to a GameItem,
+    and is then rendered by Render as a single call to glDrawElements
+    (as opposed to many calls, as would be done for a collection of
+    individual Shapes)
+    '''
+
+    def __init__(self):
+        self.children = []
+        self.matrices = []
+
+    def add(self, child, position=(0, 0, 0), orientation=None):
+        matrix = Matrix4.new_translate(*position)
+        if orientation is not None:
+            matrix *= orientation
+
+        self.children.append(child)
+        self.matrices.append(matrix)
+
+
+    @property
+    def vertices(self):
+        return (
+            matrix.transform(vertex)
+            for child, matrix in izip(self.children, self.matrices)
+            for vertex in child.vertices
+        )
+
+    # TODO: I'm deeply suspicious that this does not return the correct thing
+    # It is as-yet unused, that will be the next commit... -Jonathan.
+    @property
+    def faces(self):
+        faces = []
+
+        child_offset = 0
+        for child in self.children:
+            for face in child.faces:
+                new_indices = []
+                for index in face:
+                    new_indices.append(index + child_offset)
+                faces.append(Face(new_indices, face.color, face.vertices))
+            child_offset += len(list(child.vertices))
+
+        return faces
 
