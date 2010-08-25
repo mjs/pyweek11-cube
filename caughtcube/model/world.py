@@ -16,10 +16,8 @@ class World(object):
         return self.items.itervalues()
 
     def add(self, item):
-        print 'world.add {'
         self.items[item.id] = item
         self.item_added.fire(item)
-        print '} world.add'
 
     def remove(self, item):
         del self.items[item.id]

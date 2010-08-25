@@ -1,5 +1,5 @@
 
-from itertools import chain, izip, repeat
+from itertools import chain, repeat
 
 from pyglet.gl import gl
 
@@ -22,16 +22,13 @@ class Glyph(object):
 
     @staticmethod
     def FromShape(shape):
-        print 'Glyph.FromShape {'
         glyph = Glyph()
         vertices = list(shape.vertices)
         faces = list(shape.faces)
         glyph.glvertices = glyph.get_glvertices(vertices, faces)
-        print glyph.glvertices
         glyph.glindices = glyph.get_glindices(faces)
         glyph.glcolors = glyph.get_glcolors(faces)
         glyph.glnormals = glyph.get_glnormals(vertices, faces)
-        print glyph, '} Glyph.FromShape'
         return glyph
 
 

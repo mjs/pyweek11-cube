@@ -49,10 +49,8 @@ class Render(object):
         '''
         convert the given item's shape into a glyph, for rendering
         '''
-        print 'render.world_add_item {'
         if item.shape and not item.glyph:
             item.glyph = Glyph.FromShape(item.shape)
-        print '} render.world_add_item'
 
 
     def draw_world(self):
