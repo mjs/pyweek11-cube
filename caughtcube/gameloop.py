@@ -1,5 +1,7 @@
 from __future__ import division
+from math import cos, sin
 
+from euclid import Vector3
 import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
@@ -19,6 +21,7 @@ class Gameloop(object):
         self.options = options
         self.window = None
         self.fpss = []
+        self.time = 0.0
 
 
     def prepare(self, options):
@@ -54,6 +57,13 @@ class Gameloop(object):
         if self.options.print_fps:
             self.fpss.append(1/max(1e-6, dt))
         dt = min(dt, 1 / 30)
+        self.time += dt
+
+        self.camera.position += Vector3(
+            -sin(self.time),
+            cos(self.time),
+            0,
+        ) * 0.01
         self.window.invalid = True
 
 
