@@ -22,7 +22,6 @@ def RoomShape(edge, colors):
 
 def Room(width):
     return GameItem(
-        position=(0,0,0), #XXX this can go
-        shape=RoomShape(width, all_colors)
+        shape=RoomShape(width, all_colors),
     )
 
