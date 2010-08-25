@@ -1,12 +1,17 @@
 from __future__ import division
+from math import cos, sin
 
+from euclid import Vector3
 import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
 
 from .model.camera import Camera
 from .model.player import Player
+from .model.gameitem import GameItem
+from .model.room import Room
 from .model.world import World
+from .util.color import Color
 from .util.vectors import origin
 from .view.render import Render
 
@@ -33,9 +38,10 @@ class Gameloop(object):
         self.render = Render(self.world, self.window, self.camera)
         self.render.init()
         
+        self.world.add(Room(32))
         self.player = Player()
         self.world.add(self.player)
-        
+
 
     def run(self):
         pyglet.clock.schedule(self.update)
@@ -49,8 +55,11 @@ class Gameloop(object):
         dt = min(dt, 1 / 30)
         self.time += dt
 
-        self.world.update(dt, self.time)
-
+        self.camera.position += Vector3(
+            -sin(self.time),
+            cos(self.time),
+            0,
+        ) * 0.01
         self.window.invalid = True
 
 
