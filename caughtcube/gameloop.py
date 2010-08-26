@@ -10,6 +10,7 @@ from .model.levels import populate
 from .model.world import World
 from .model.move import orbit
 from .view.render import Render
+from .util.vectors import origin
 
 
 class Gameloop(object):
@@ -37,7 +38,7 @@ class Gameloop(object):
         self.world.add(self.player, position=start_pos)
 
         self.camera = GameItem(
-            position=(8, 10, 5),
+            position=origin,
             look_at=self.player,
             update=orbit,
         )
