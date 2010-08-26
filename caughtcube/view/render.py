@@ -46,6 +46,7 @@ class Render(object):
         fs = FragmentShader(
             join('caughtcube', 'view', 'shaders', 'lighting.frag'))
         shader = ShaderProgram(vs, fs)
+        shader.compile()
         shader.use()
 
         # create glyphs for every item added to the world before now

@@ -143,7 +143,7 @@ class ShaderProgram(object):
         return '\n'.join(messages)
 
         
-    def use(self):
+    def compile(self):
         self.id = gl.glCreateProgram()
         
         for shader in self.shaders:
@@ -155,7 +155,9 @@ class ShaderProgram(object):
         message = self._get_message()
         if not self.get_link_status():
             raise LinkError(message)
-
-        gl.glUseProgram(self.id)
         return message
+
+
+    def use(self):
+        return gl.glUseProgram(self.id)
 
