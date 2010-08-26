@@ -6,7 +6,15 @@ from .gameitem import GameItem
 from .shape import Shape
 
 
-def WallShape(size, color, invert=False):
+def WallShape(size, colors, invert=False):
+    '''
+    returns a cuboid shape encompassing worldspace co-ords:
+        x: 0 to size[0]-1
+        y: 0 to size[1]-1
+        z: 0 to size[2]-1
+    If 'invert' is True, the faces are flipped to make the shape suitable
+    for viewing from the inside
+    '''
     xmax, ymax, zmax = size
     xmin, ymin, zmin = (-0.5, -0.5, -0.5) 
     xmax -= 0.5
@@ -24,7 +32,7 @@ def WallShape(size, color, invert=False):
     if invert:
         for face in faces:
             face.reverse()
-    return Shape(verts, faces, color)
+    return Shape(verts, faces, colors)
 
 
 def Wall(size, position):
