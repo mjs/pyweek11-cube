@@ -1,16 +1,18 @@
 from __future__ import division
+from itertools import product
 
-from itertools import product, repeat
-from ..model.gameitem import GameItem
-from ..model.shape import Shape
 from ..util.color import grey
+from .gameitem import GameItem
+from .shape import Shape
 
 
-def WallShape(size, color):
-    verts = list(product(*repeat([-0.5, +0.5], 3)))
-    def stretch(v):
-        return (v[0]*size[0], v[1]*size[1], v[2]*size[2])
-    verts = map(stretch, verts)
+def WallShape(size, color, invert=False):
+    xmax, ymax, zmax = size
+    xmin, ymin, zmin = (-0.5, -0.5, -0.5) 
+    xmax -= 0.5
+    ymax -= 0.5
+    zmax -= 0.5
+    verts = list(product((xmin, xmax), (ymin, ymax), (zmin, zmax)))
     faces = [
         [0, 1, 3, 2], # left
         [4, 6, 7, 5], # right
@@ -19,6 +21,9 @@ def WallShape(size, color):
         [3, 7, 6, 2], # top
         [1, 0, 4, 5], # bottom
     ]
+    if invert:
+        for face in faces:
+            face.reverse()
     return Shape(verts, faces, color)
 
 
