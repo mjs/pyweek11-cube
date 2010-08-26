@@ -6,10 +6,10 @@ from ..model.shape import Shape
 from ..util.color import grey
 
 
-def WallShape(width, height, orientation, color):
+def WallShape(size, color):
     verts = list(product(*repeat([-0.5, +0.5], 3)))
     def stretch(v):
-        return (v[0]*width, v[1]*height, v[2])
+        return (v[0]*size[0], v[1]*size[1], v[2]*size[2])
     verts = map(stretch, verts)
     faces = [
             [0, 1, 3, 2], # left
@@ -22,9 +22,9 @@ def WallShape(width, height, orientation, color):
     return Shape(verts, faces, color)
 
 
-def Wall(width, height, position, orientation):
+def Wall(size, position):
     return GameItem(
         position=position,
-        shape=WallShape(width, height, orientation, grey),
+        shape=WallShape(size, grey),
     )
 
