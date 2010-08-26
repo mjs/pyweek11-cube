@@ -38,7 +38,8 @@ class Gameloop(object):
         self.world.add(self.player)
 
         #right, up, close
-        self.world.add(Wall(1.5, 2, (-2, 0.5, -4), 0))
+        self.world.add(Wall((1.5, 2, 1), (-2, 0.5, -4)))
+        self.world.add(Wall((1, 3, 4), (2, 0.5, -2)))
 
         self.camera = GameItem(
             position=(2, 5, 10),
