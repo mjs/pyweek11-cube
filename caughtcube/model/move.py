@@ -46,6 +46,7 @@ class directed_motion(object):
             if self._has_reached_destination(new_position):
                 # stop moving
                 item.position = self.destination
+                print item.position
                 self.velocity = None
                 self.next_move = None
             else:
