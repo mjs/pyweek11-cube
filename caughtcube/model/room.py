@@ -1,9 +1,7 @@
 from __future__ import division
-from itertools import product
 
 from ..util.color import white, blue
 from .gameitem import GameItem
-from .shape import Shape
 from .wall import WallShape
 
 
