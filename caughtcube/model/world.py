@@ -1,4 +1,6 @@
 
+from euclid import Vector3
+
 from ..util.color import Color
 from ..util.event import Event
 from ..util.vectors import round_to_int
@@ -32,11 +34,15 @@ class World(object):
     def __iter__(self):
         return self.items.itervalues()
 
-    def add(self, item, **kwargs):
-        item.apply_kwargs(**kwargs)
-        self.items[item.id] = item
+    def add(self, item, position=None):
+        if position is not None:
+            if not isinstance(position, Vector3):
+                position = Vector3(*position)
+            item.position = position
         if hasattr(item, 'position'):
             item.position = round_to_int(item.position)
+
+        self.items[item.id] = item
         self.collision.add(item)
         self.item_added.fire(item)
 

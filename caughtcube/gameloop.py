@@ -35,7 +35,6 @@ class Gameloop(object):
         self.player = Player()
         self.world.add(self.player, position=(0, 1, 0))
 
-        #right, up, close
         self.world.add(Wall((1, 2, 1), (-2, 0, -4)))
         self.world.add(Wall((1, 3, 4), ( 2, 0, -2)))
 
