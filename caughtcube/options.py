@@ -6,7 +6,7 @@ from . import version
 class Options(object):
 
     def __init__(self, argv):
-        self.vsync = '--vsync' in argv
+        self.novsync = '--novsync' in argv
         self.fullscreen = '--fullscreen' in argv or '-f' in argv
         self.print_fps = '--print-fps' in argv
         self.display_fps = '--fps' in argv

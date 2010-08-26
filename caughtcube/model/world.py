@@ -21,7 +21,7 @@ class World(object):
     the world, so that the view can react accordingly.
     '''
 
-    sky_color = Color(0.2, 0.7, 1.0, 1.0)
+    sky_color = Color(0.0, 0.1, 0.3, 1.0)
 
     def __init__(self):
         self.items = {}

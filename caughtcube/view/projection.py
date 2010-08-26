@@ -1,5 +1,6 @@
 from __future__ import division
 
+from pyglet.event import EVENT_HANDLED
 from pyglet.gl import gl, glu
 
 
@@ -18,6 +19,7 @@ class Projection(object):
         self.width = width
         self.height = height
         gl.glViewport(0, 0, width, height)
+        return EVENT_HANDLED
 
 
     def set_ortho(self, zoom):
