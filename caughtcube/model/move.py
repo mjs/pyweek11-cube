@@ -3,7 +3,6 @@ from math import copysign, cos, sin
 
 from euclid import Vector3
 
-from ..util.vectors import round_down_to_int
 
 def orbit(item, dt, time):
     item.position = Vector3(
@@ -15,7 +14,10 @@ def orbit(item, dt, time):
 
 class directed_motion(object):
 
+    SPEED = 0.06
+
     def __init__(self):
+        self.input = None
         self.delta = None
         self.next_move = None
 
@@ -28,10 +30,13 @@ class directed_motion(object):
     def __call__(self, item, dt, time):
         position = item.position
 
+        if self.input is not None:
+            self.next_move = self.input
+
         if not self.delta and self.next_move:
             # start moving
             self.destination = item.position + self.next_move
-            self.delta = self.next_move / 10.0
+            self.delta = self.next_move * self.SPEED
             self._stop_moving_flag = -copysign(1, sum(self.next_move))
             self.next_move = None
 
