@@ -7,7 +7,7 @@ from .move import directed_motion
 
 def Player():
     return GameItem(
-        shape=Cube(1.0, white),
+        shape=Cube(0.8, white),
         update=directed_motion(),
     )
 

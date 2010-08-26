@@ -34,6 +34,5 @@ def RoomShape(xmax, ymax, zmax, colors):
 def Room(xsize, ysize, zsize):
     return GameItem(
         shape=RoomShape(xsize, ysize, zsize, all_colors),
-        
     )
 
