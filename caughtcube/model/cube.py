@@ -13,8 +13,8 @@ def Cube(edge, colors=None):
         [4, 6, 7, 5], # right
         [7, 3, 1, 5], # front
         [0, 2, 6, 4], # back
-        [3, 7, 6, 2], # top
-        [1, 0, 4, 5], # bottom
+        [3, 7, 6, 2], # +y top
+        [1, 0, 4, 5], # -y bottom
     ]
     return Shape(verts, faces, colors)
 

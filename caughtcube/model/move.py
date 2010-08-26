@@ -6,9 +6,9 @@ from euclid import Vector3
 
 def orbit(item, dt, time):
     item.position = Vector3(
-        -sin(time),
+        2 -sin(time),
         4 + cos(time),
-        4,
+        3,
     ) * 2
 
 
@@ -45,6 +45,7 @@ class directed_motion(object):
             next_position = item.position + self.delta
             if self._has_reached_destination(next_position):
                 # stop moving
+                item.position = self.destination
                 self.delta = None
                 self.next_move = None
             else:

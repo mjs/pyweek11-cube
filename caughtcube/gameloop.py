@@ -6,8 +6,7 @@ from pyglet.window import Window
 
 from .model.player import Player
 from .model.gameitem import GameItem
-from .model.room import Room
-from .model.levels import levels
+from .model.levels import populate
 from .model.world import World
 from .model.move import orbit
 from .view.render import Render
@@ -31,16 +30,14 @@ class Gameloop(object):
         self.window.on_draw = self.draw_window
 
         self.world = World()
-        self.world.add(Room(16))
 
-        for item in levels[0]:
-            self.world.add(item)
+        start_pos = populate(self.world, 1)
 
         self.player = Player()
-        self.world.add(self.player, position=(0, 1, 0))
+        self.world.add(self.player, position=start_pos)
 
         self.camera = GameItem(
-            position=(2, 5, 10),
+            position=(8, 10, 5),
             look_at=self.player,
             update=orbit,
         )
