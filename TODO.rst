@@ -9,9 +9,6 @@ GAMEPLAY
 * Other obstacles in the world - raised walls or columns in the room.
 * Player collides with these obstacles
 
-* Have camera look at the player as they move around
-* Maybe have camera float around the ceiling, for funky 3D-ness of it all
-
 * Create some sort of exit that the player must reach.
 * The exit may be embedded within a wall, so that only one face of it is
   visible
@@ -81,4 +78,7 @@ VERY OPTIONAL or SPECULATIVE
   only come to rest or change direction at integer ordinates, but moves
   smoothly from one location to the next.
 * player movement should continue when key held down
+
+* Have camera look at the player as they move around
+* Maybe have camera float around the ceiling, for funky 3D-ness of it all
 
