@@ -2,14 +2,7 @@
 GAMEPLAY
 --------
 
-* player movement should continue when key held down
-
-* bug: Changing room verts alters shape of player? vice-versa?
-
-* Let player move around with cursor keys. The player (like all things) can
-  only come to rest or change direction at integer ordinates, but moves
-  smoothly from one location to the next.
-* Player collides with walls of the room
+* Player collides with room and wall obstacles
 * maybe even let player smoothly speed up or slow down, within the above
   constraints.
 
@@ -23,9 +16,9 @@ GAMEPLAY
 * The exit may be embedded within a wall, so that only one face of it is
   visible
 * For some reason, I'm taken with the idea of the exit appearance being a black
-  cube, with the word 'exit' in tiny letters on each face, a la Gauntlet.
-  This may be a bit silly. Hooray!
-
+  cube (which may be embedded within a wall,thus only exposing a single face)
+  Each of the horizontally-facing faces has the word 'exit' in tiny white
+  letters on it, a la Gauntlet. This may be a bit silly. Hooray!
 * reaching the exit progresses to the next room?
   (it would be nice to have multiple interconnected rooms all 'visible' at
   once, but that might be a bit ambitious for now)
@@ -83,6 +76,9 @@ VERY OPTIONAL or SPECULATIVE
 
 * Create a large cuboid room (say 20x20x20)
 * Position the camera near the ceiling.
-
 * Put player, shape=Cube(1, white), within the room
+* Let player move around with cursor keys. The player (like all things) can
+  only come to rest or change direction at integer ordinates, but moves
+  smoothly from one location to the next.
+* player movement should continue when key held down
 
