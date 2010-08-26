@@ -1,13 +1,16 @@
 from __future__ import division
 
-from itertools import product, repeat
+from itertools import product
 
 from .shape import Shape
 
 
 def Cube(edge, colors=None):
-    e2 = edge / 2
-    verts = list(product(*repeat([-e2, +e2], 3)))
+    return Cuboid(edge, edge, edge, colors)
+
+
+def Cuboid(x, y, z, colors=None):
+    verts = list(product((-x/2, +x/2), (-y/2, +y/2), (-z/2, +z/2)))
     faces = [
         [0, 1, 3, 2], # left
         [4, 6, 7, 5], # right
