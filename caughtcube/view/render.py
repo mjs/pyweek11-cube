@@ -1,4 +1,6 @@
 
+from os.path import join
+
 import pyglet
 from pyglet.gl import gl
 
@@ -6,6 +8,7 @@ from ..util.color import Color
 from .glyph import Glyph
 from .modelview import ModelView
 from .projection import Projection
+from .shader import FragmentShader, ShaderProgram, VertexShader
 
 
 type_to_enum = {
@@ -38,6 +41,13 @@ class Render(object):
 
         gl.glClearColor(*self.world.sky_color)
 
+        vs = VertexShader(
+            join('caughtcube', 'view', 'shaders', 'lighting.vert'))
+        fs = FragmentShader(
+            join('caughtcube', 'view', 'shaders', 'lighting.frag'))
+        shader = ShaderProgram(vs, fs)
+        shader.use()
+
         # create glyphs for every item added to the world before now
         for item in self.world:
             self.world_add_item(item)
@@ -64,7 +74,7 @@ class Render(object):
                 continue
             glyph = item.glyph
             gl.glPushMatrix()
-            if item.position:
+            if hasattr(item, 'position'):
                 gl.glTranslatef(*item.position)
             # TODO: item orientation
             gl.glVertexPointer(

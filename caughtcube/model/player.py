@@ -5,10 +5,9 @@ from .cube import Cube
 from .move import directed_motion
 
 
-def Player(**kwargs):
+def Player():
     return GameItem(
-        shape=Cube(1, white),
+        shape=Cube(0.8, white),
         update=directed_motion(),
-        **kwargs
     )
 

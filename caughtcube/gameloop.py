@@ -1,7 +1,5 @@
 from __future__ import division
-from math import cos, sin
 
-from euclid import Vector3
 import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
@@ -34,12 +32,12 @@ class Gameloop(object):
 
         self.world = World()
         self.world.add(Room(16))
-        self.player = Player(position=(0, 1, 0))
-        self.world.add(self.player)
+        self.player = Player()
+        self.world.add(self.player, position=(0, 1, 0))
 
         #right, up, close
-        self.world.add(Wall((1.5, 2, 1), (-2, 0.5, -4)))
-        self.world.add(Wall((1, 3, 4), (2, 0.5, -2)))
+        self.world.add(Wall((1, 2, 1), (-2, 0, -4)))
+        self.world.add(Wall((1, 3, 4), ( 2, 0, -2)))
 
         self.camera = GameItem(
             position=(2, 5, 10),

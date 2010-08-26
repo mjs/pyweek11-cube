@@ -32,7 +32,8 @@ class World(object):
     def __iter__(self):
         return self.items.itervalues()
 
-    def add(self, item):
+    def add(self, item, **kwargs):
+        item.apply_kwargs(**kwargs)
         self.items[item.id] = item
         if hasattr(item, 'position'):
             item.position = round_to_int(item.position)
