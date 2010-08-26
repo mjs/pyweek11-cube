@@ -86,6 +86,12 @@ class Shape(object):
 
         # if given one color instead of a sequence of them,
         # then construct a sequence if identical colors out of it
+        if (
+            isinstance(colors, tuple) and
+            len(colors) == 4 and
+            isinstance(colors[0], int)
+        ):
+            colors = Color(*colors)
         if isinstance(colors, Color):
             colors = repeat(colors)
 
