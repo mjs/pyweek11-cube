@@ -25,7 +25,7 @@ class Gameloop(object):
     def prepare(self, options):
         self.window = Window(
             fullscreen=options.fullscreen,
-            vsync=options.vsync,
+            vsync=not options.novsync,
             visible=False,
             resizable=True)
         self.window.on_draw = self.draw_window
@@ -62,6 +62,7 @@ class Gameloop(object):
         self.time += dt
 
         self.world.update(dt, self.time)
+        self.window.invalid = True
 
 
     def draw_window(self):
@@ -69,6 +70,7 @@ class Gameloop(object):
         self.render.draw_world()
         if self.options.display_fps:
             self.render.draw_hud()
+        self.window.invalid = False
         return EVENT_HANDLED
 
 
