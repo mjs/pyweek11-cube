@@ -33,13 +33,14 @@ class Gameloop(object):
 
         self.world = World()
         self.world.add(Room(16))
+
         self.player = Player(position=(0, 1, 0))
         self.world.add(self.player)
 
         self.camera = GameItem(
             position=(2, 5, 10),
             look_at=self.player,
-            #update=orbit,
+            update=orbit,
         )
         self.world.add(self.camera)
 
@@ -57,6 +58,7 @@ class Gameloop(object):
             self.fpss.append(1/max(1e-6, dt))
         dt = min(dt, 1 / 30)
         self.time += dt
+
         self.world.update(dt, self.time)
 
 

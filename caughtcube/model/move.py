@@ -1,5 +1,5 @@
 
-from math import cos, sin
+from math import copysign, cos, sin
 
 from euclid import Vector3
 
@@ -19,18 +19,30 @@ class directed_motion(object):
         self.delta = None
         self.next_move = None
 
+
+    def _has_reached_destination(self, position):
+        offset = position - self.destination
+        return self._stop_moving_flag != copysign(1, sum(offset))
+
+
     def __call__(self, item, dt, time):
         position = item.position
 
         if not self.delta and self.next_move:
-            self.last_int_position = round_down_to_int(position)
+            # start moving
+            self.destination = item.position + self.next_move
             self.delta = self.next_move / 10.0
+            self._stop_moving_flag = -copysign(1, sum(self.next_move))
             self.next_move = None
 
         if self.delta:
-            item.position += self.delta
-            int_position = round_down_to_int(position) 
-            if int_position != self.last_int_position:
+            # is moving
+            next_position = item.position + self.delta
+            if self._has_reached_destination(next_position):
+                # stop moving
                 self.delta = None
-            self.last_int_position = int_position
-                
+                self.next_move = None
+            else:
+                # continue moving
+                item.position = next_position
+
