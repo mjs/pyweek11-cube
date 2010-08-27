@@ -1,7 +1,6 @@
 from __future__ import division
 from itertools import product
 
-from ..util.color import grey
 from .gameitem import GameItem
 from .shape import Shape
 
@@ -35,9 +34,9 @@ def WallShape(size, colors, invert=False):
     return Shape(verts, faces, colors)
 
 
-def Wall(size, position):
+def Wall(size, position, color):
     return GameItem(
         position=position,
-        shape=WallShape(size, grey),
+        shape=WallShape(size, color),
     )
 
