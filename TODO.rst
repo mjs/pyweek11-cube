@@ -3,20 +3,12 @@ GAMEPLAY
 --------
 
 * Player collides with room and wall obstacles
-* maybe even let player smoothly speed up or slow down, within the above
-  constraints.
 
-* Other obstacles in the world - raised walls or columns in the room.
-* Player collides with these obstacles
-
-* Create some sort of exit that the player must reach.
-* The exit may be embedded within a wall, so that only one face of it is
-  visible
-* For some reason, I'm taken with the idea of the exit appearance being a black
-  cube (which may be embedded within a wall,thus only exposing a single face)
-  Each of the horizontally-facing faces has the word 'exit' in tiny white
-  letters on it, a la Gauntlet. This may be a bit silly. Hooray!
-* reaching the exit progresses to the next room?
+* level generator populates levels by loading text files
+* define a bunch of levels as text files
+* An 'end of level' method which removes everything from the world,
+  gets the next level and puts the player in it. 
+* When player reaches exit, call 'end of level' method
   (it would be nice to have multiple interconnected rooms all 'visible' at
   once, but that might be a bit ambitious for now)
 
@@ -48,10 +40,12 @@ VERY OPTIONAL or SPECULATIVE
 ----------------------------
 
 * Add bitmaps to our fragment shader
-
+* the word 'EXIT' on the exit
 * big colored pixels on the walls (same size as player's cube)
+* writing on the wall, done as bitmap letters
 
-* writing on the wall (one letter per 
+* maybe let player smoothly speed up or slow down, within the above
+  constraints.
 
 * It would be nice to have per-pixel lighting. Pretty.
 
@@ -81,4 +75,13 @@ VERY OPTIONAL or SPECULATIVE
 
 * Have camera look at the player as they move around
 * Maybe have camera float around the ceiling, for funky 3D-ness of it all
+
+* Other obstacles in the world - raised walls or columns in the room.
+* Create some sort of exit that the player must reach.
+* The exit may be embedded within a wall, so that only one face of it is
+  visible
+* For some reason, I'm taken with the idea of the exit appearance being a black
+  cube (which may be embedded within a wall,thus only exposing a single face)
+  Each of the horizontally-facing faces has the word 'exit' in tiny white
+  letters on it, a la Gauntlet. This may be a bit silly. Hooray!
 
