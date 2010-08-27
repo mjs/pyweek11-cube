@@ -5,6 +5,44 @@ from .gameitem import GameItem
 from .wall import WallShape
 
 
+def RoomBounds(xsize, ysize, zsize):
+    bounds = set()
+    bounds.union( {
+        (-1, y, z)
+        for y in xrange(0, ysize)
+        for z in xrange(0, zsize)
+    } )
+    bounds.union( {
+        (xsize, y, z)
+        for y in xrange(0, ysize)
+        for z in xrange(0, zsize)
+    } )
+
+    bounds.union( {
+        (x, -1, z)
+        for x in xrange(0, xsize)
+        for z in xrange(0, zsize)
+    } )
+    bounds.union( {
+        (x, ysize, z)
+        for x in xrange(0, xsize)
+        for z in xrange(0, zsize)
+    } )
+
+    bounds.union( {
+        (x, y, -1)
+        for x in xrange(0, xsize)
+        for y in xrange(0, ysize)
+    } )
+    bounds.union( {
+        (x, y, zsize)
+        for x in xrange(0, xsize)
+        for y in xrange(0, ysize)
+    } )
+    
+    return bounds
+
+
 def Room(xsize, ysize, zsize):
     '''
     Interior of room goes from:
@@ -18,5 +56,6 @@ def Room(xsize, ysize, zsize):
     paleblue = white.tinted(cyan, 0.1)
     return GameItem(
         shape=WallShape((xsize, ysize, zsize), paleblue, invert=True),
+        bounds=RoomBounds(xsize, ysize, zsize),
     )
 

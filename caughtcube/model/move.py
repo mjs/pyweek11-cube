@@ -16,7 +16,8 @@ class directed_motion(object):
 
     SPEED = 0.06
 
-    def __init__(self):
+    def __init__(self, world):
+        self.world = world
         self.input = None
         self.velocity = None
         self.next_move = None
@@ -33,15 +34,8 @@ class directed_motion(object):
         if self.input is not None:
             self.next_move = self.input
 
-        if not self.velocity and self.next_move:
-            # start moving
-            self.destination = item.position + self.next_move
-            self.velocity = self.next_move * self.SPEED
-            self._stop_moving_flag = -copysign(1, sum(self.next_move))
-            self.next_move = None
-
+        # if moving
         if self.velocity:
-            # is moving
             new_position = item.position + self.velocity
             if self._has_reached_destination(new_position):
                 # stop moving
@@ -51,4 +45,16 @@ class directed_motion(object):
             else:
                 # continue moving
                 item.position = new_position
+
+        elif self.next_move:
+            # not moving and a move is requested
+            destination = item.position + self.next_move
+            # TODO: should check all entries in item.bounds + destination,
+            # instead of just { (0,0,0) } + destination
+            if tuple(destination) not in self.world.collision.occupied:
+                # start moving
+                self.destination = destination
+                self.velocity = self.next_move * self.SPEED
+                self._stop_moving_flag = -copysign(1, sum(self.next_move))
+            self.next_move = None
 
