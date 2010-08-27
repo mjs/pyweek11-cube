@@ -9,9 +9,12 @@ from .item.wall import Wall
 LEVEL_DIR = path.join(path.dirname(__file__), '..', '..', 'data')
 
 def populate(world, number):
+    start_position = (5, 5, 5)
     for item in load_level(file(get_level_path(number))):
-        world.add(item)
-    start_position = (5, 0, 0)
+        if isinstance(item, tuple):
+            start_position = item
+        else:
+            world.add(item)
     return start_position
 
 
@@ -23,7 +26,11 @@ def load_level(fileobj):
     for line in fileobj:
         parts = map(str.strip, line.split(':'))
         yield loaders[parts[0]](*parts[1:])
-        
+
+
+def load_player(a):
+    return parse_triple(a)
+
 
 def load_room(dim):
     return Room(*parse_triple(dim))
@@ -40,6 +47,7 @@ def load_exit(where):
 
 
 loaders = {
+    'player': load_player,
     'room': load_room,
     'wall': load_wall,
     'exit': load_exit,
