@@ -19,7 +19,6 @@ GAMEPLAY
   to have to worry about all this collision checking. The flagrant demeter
   violations in this function hint at this.
 
-* level generator populates levels by loading text files
 * define a bunch of levels as text files
 * An 'end of level' method which removes everything from the world,
   gets the next level and puts the player in it. 
