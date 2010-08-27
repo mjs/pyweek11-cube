@@ -3,16 +3,11 @@ GAMEPLAY
 --------
 
 * Player collides with room and wall obstacles
-    * each item defines its own 'bounds', a set of co-ordinates relative to
-      its own center, which represents the space it occupies. For example,
-      the set player.bounds = { (0, 0, 0) } # it occupies one cube only
-    * world.add adds the item.bounds, plus item.position offset, to the
-      world collision dictionary.
-    * world.remove removes it
-    * when starting to move, an item must check if intended destination is
-      ccupied. (player collision with room and walls shoudl work now)
-    * When move starts, intended destination must be marked as occupied
-      by item. When move complete, old position must be marked as unoccupied.
+    * bug, collision with room does not work, reasons unknown
+    * bug, player cannot move back into player start location, because the
+      following is not implemented:
+        * When move starts, intended destination must be marked as occupied by
+          item. When move complete, old position must be marked as unoccupied.
 
 * level generator populates levels by loading text files
 * define a bunch of levels as text files
@@ -104,4 +99,14 @@ VERY OPTIONAL or SPECULATIVE
   Each of the horizontally-facing faces has the word 'exit' in tiny white
   letters on it, a la Gauntlet. This may be a bit silly. Hooray!
 * Add shader with simple directional lighting
+
+Collision detection:
+    * each item defines its own 'bounds', a set of co-ordinates relative to
+      its own center, which represents the space it occupies. For example,
+      the set player.bounds = { (0, 0, 0) } # it occupies one cube only
+    * world.add adds the item.bounds, plus item.position offset, to the
+      world collision dictionary.
+    * world.remove removes it
+    * when starting to move, an item must check if intended destination is
+      occupied. (player collision with room and walls shoudl work now)
 

@@ -21,7 +21,7 @@ levels = {
         Wall((1, 1, 1), (6, 0, 0), paleblue),
         Wall((6, 1, 1), (1, 0, 1), paleblue),
         Wall((3, 1, 1), (0, 0, 3), paleblue),
-        Wall((1, 1, 4), (4, 0, 2), paleblue),
+        Wall((1, 1, 3), (4, 0, 2), paleblue),
         Wall((2, 1, 1), (6, 0, 3), paleblue),
         Wall((5, 1, 1), (2, 0, 5), paleblue),
         Wall((1, 1, 1), (0, 0, 4), paleblue),

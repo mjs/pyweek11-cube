@@ -26,7 +26,7 @@ clean:
 
 
 tags:
-	ctags -R ${PACKAGE}
+	ctags -R ${PACKAGE} lib
 .PHONY: tags
 
 

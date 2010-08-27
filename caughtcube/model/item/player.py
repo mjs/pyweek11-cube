@@ -14,9 +14,10 @@ def PlayerShape():
     multi.add(Cuboid(0.6, 0.6, 30, (255, 255, 128, 35)))
     return multi
 
-def Player():
+def Player(world):
     return GameItem(
         shape=PlayerShape(),
-        update=directed_motion(),
+        update=directed_motion(world),
+        bounds={ (0, 0, 0) },
     )
 
