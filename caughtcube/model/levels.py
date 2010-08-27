@@ -1,34 +1,55 @@
 
-from ..util.color import white, cyan
+from os import path
+from ..util import color
 from .item.exit import Exit
 from .item.room import Room
 from .item.wall import Wall
 
 
+LEVEL_DIR = path.join(path.dirname(__file__), '..', '..', 'data')
+
 def populate(world, number):
-    for item in levels[number]:
+    for item in load_level(file(get_level_path(number))):
         world.add(item)
     start_position = (5, 0, 0)
     return start_position
 
 
-paleblue = white.tinted(cyan, 0.15)
+def get_level_path(number):
+    return path.join(LEVEL_DIR, '%02d.lvl' % number)
+    
 
-levels = {
-    1: [
-        Room(8, 16, 8),
-        # if someone wanted to write a maze-generator, that would be fine by me
-        Wall((1, 1, 1), (6, 0, 0), paleblue),
-        Wall((6, 1, 1), (1, 0, 1), paleblue),
-        Wall((3, 1, 1), (0, 0, 3), paleblue),
-        Wall((1, 1, 3), (4, 0, 2), paleblue),
-        Wall((2, 1, 1), (6, 0, 3), paleblue),
-        Wall((5, 1, 1), (2, 0, 5), paleblue),
-        Wall((1, 1, 1), (0, 0, 4), paleblue),
-        Wall((2, 1, 1), (1, 0, 6), paleblue),
-        Wall((1, 1, 1), (6, 0, 6), paleblue),
-        Wall((1, 1, 1), (4, 0, 7), paleblue),
-        Exit((7, 0, -1)),
-    ],
+def load_level(fileobj):
+    for line in fileobj:
+        parts = map(str.strip, line.split(':'))
+        yield loaders[parts[0]](*parts[1:])
+        
+
+def load_room(dim):
+    return Room(*parse_triple(dim))
+
+
+def load_wall(a, b, color_name):
+    return Wall(parse_triple(a),
+                parse_triple(b),
+                getattr(color, color_name))
+
+
+def load_exit(where):
+    return Exit(parse_triple(where))
+
+
+loaders = {
+    'room': load_room,
+    'wall': load_wall,
+    'exit': load_exit,
 }
+
+
+def parse_triple(triple_str):
+    t = tuple(int(x.strip()) for x in triple_str.split(','))
+    assert len(t) == 3
+    return t 
+
+
 

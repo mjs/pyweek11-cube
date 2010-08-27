@@ -9,7 +9,6 @@ GAMEPLAY
         * When move starts, intended destination must be marked as occupied by
           item. When move complete, old position must be marked as unoccupied.
 
-* level generator populates levels by loading text files
 * define a bunch of levels as text files
 * An 'end of level' method which removes everything from the world,
   gets the next level and puts the player in it. 
