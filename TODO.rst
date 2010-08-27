@@ -122,3 +122,5 @@ Collision detection:
       keys. They should be unhashable. Fixed in project Euclid and we now
       use equivalent tuple as the dict key)
 
+* level generator populates levels by loading text files
+

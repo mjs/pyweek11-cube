@@ -18,6 +18,6 @@ def Player(world):
     return GameItem(
         shape=PlayerShape(),
         update=directed_motion(world),
-        bounds=set((0, 0, 0)),
+        bounds=set([(0, 0, 0)]),
     )
 
