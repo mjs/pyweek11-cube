@@ -3,6 +3,16 @@ GAMEPLAY
 --------
 
 * Player collides with room and wall obstacles
+    * each item defines its own 'bounds', a set of co-ordinates relative to
+      its own center, which represents the space it occupies. For example,
+      the set player.bounds = { (0, 0, 0) } # it occupies one cube only
+    * world.add adds the item.bounds, plus item.position offset, to the
+      world collision dictionary.
+    * world.remove removes it
+    * when starting to move, an item must check if intended destination is
+      ccupied. (player collision with room and walls shoudl work now)
+    * When move starts, intended destination must be marked as occupied
+      by item. When move complete, old position must be marked as unoccupied.
 
 * level generator populates levels by loading text files
 * define a bunch of levels as text files
@@ -33,23 +43,32 @@ GAMEPLAY
 ENGINE
 ------
 
-* Add shader with simple directional lighting
+* Add bitmaps to our fragment shader
+    * give room walls a very low resolution bitmap (one pixel is same size
+      as player)
+    * add the word 'EXIT' on the horizontal faces of the exit, a la Gauntlet
+
+* when gameitems added to the world are intended to be unmoving ('static'),
+  we remove their shape attribute, and append it to a single 'world' multishape
+  instead. This allows all static gameitems to be drawn by Render in a single
+  glDrawElements call, which is much faster.
 
 
 VERY OPTIONAL or SPECULATIVE
 ----------------------------
 
-* Add bitmaps to our fragment shader
-* the word 'EXIT' on the exit
-* big colored pixels on the walls (same size as player's cube)
-* writing on the wall, done as bitmap letters
+* in-game text, either as bitmap letters on the walls, or as chunky letters
+  formed out of walls:
+    * instructions, keys, clues, level names, etc, displayed in-game
+    * score, displayed in-game
 
-* maybe let player smoothly speed up or slow down, within the above
-  constraints.
+* maybe let player smoothly speed up or slow down, within the existing
+  'stop only at integer ords' constraint.
 
 * It would be nice to have per-pixel lighting. Pretty.
 
-* It would be nice to have mobile lightsources within the world space.
+* It would be nice to have mobile lightsources within the world space. Attached
+  to in-game items.
 
 
 `--DONE------------------------------------------------------------`
@@ -84,4 +103,5 @@ VERY OPTIONAL or SPECULATIVE
   cube (which may be embedded within a wall,thus only exposing a single face)
   Each of the horizontally-facing faces has the word 'exit' in tiny white
   letters on it, a la Gauntlet. This may be a bit silly. Hooray!
+* Add shader with simple directional lighting
 

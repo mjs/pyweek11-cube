@@ -7,6 +7,6 @@ from .gameitem import GameItem
 def Exit(position):
     return GameItem(
         shape=Cube(1.01, black),
-        position=position
+        position=position,
     )
 
