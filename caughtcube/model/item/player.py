@@ -1,9 +1,9 @@
 
-from ..util.color import white
+from ...util.color import white
+from ..shape import MultiShape
+from ..cube import Cube, Cuboid
+from ..move import directed_motion
 from .gameitem import GameItem
-from .shape import MultiShape
-from .cube import Cube, Cuboid
-from .move import directed_motion
 
 
 def PlayerShape():

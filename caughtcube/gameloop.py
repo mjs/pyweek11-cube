@@ -4,8 +4,8 @@ import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
 
-from .model.player import Player
-from .model.gameitem import GameItem
+from .model.item.gameitem import GameItem
+from .model.item.player import Player
 from .model.levels import populate
 from .model.world import World
 from .model.move import orbit

@@ -1,8 +1,8 @@
 from __future__ import division
 from itertools import product
 
+from ..shape import Shape
 from .gameitem import GameItem
-from .shape import Shape
 
 
 def WallShape(size, colors, invert=False):

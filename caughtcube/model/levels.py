@@ -1,8 +1,8 @@
 
 from ..util.color import white, cyan
-from .exit import Exit
-from .room import Room
-from .wall import Wall
+from .item.exit import Exit
+from .item.room import Room
+from .item.wall import Wall
 
 
 def populate(world, number):
