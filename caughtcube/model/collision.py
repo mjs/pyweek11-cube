@@ -33,6 +33,7 @@ class Collision(object):
                         ) )
                 self.occupied[location] = item
 
+
     def remove(self, item):
         '''
         remove an item from the world. Raise if it was not present
