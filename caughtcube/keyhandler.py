@@ -1,6 +1,5 @@
 
 from __future__ import division
-from collections import deque
 
 from pyglet.window import key 
 

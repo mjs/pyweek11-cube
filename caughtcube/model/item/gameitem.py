@@ -1,6 +1,7 @@
 
 from euclid import Vector3
-from ..util.vectors import origin
+
+from ...util.vectors import origin
 
 
 class GameItem(object):

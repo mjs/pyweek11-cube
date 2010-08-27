@@ -1,6 +1,6 @@
 from __future__ import division
 
-from ..util.color import white, cyan
+from ...util.color import white, cyan
 from .gameitem import GameItem
 from .wall import WallShape
 

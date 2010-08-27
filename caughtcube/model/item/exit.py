@@ -1,7 +1,7 @@
 
-from ..util.color import black
+from ...util.color import black
+from ..cube import Cube
 from .gameitem import GameItem
-from .cube import Cube
 
 
 def Exit(position):
