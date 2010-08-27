@@ -38,11 +38,11 @@ def Wall(size, position, color):
     return GameItem(
         position=position,
         shape=WallShape(size, color),
-        bounds={
+        bounds=set(
             (x, y, z)
             for x in xrange(0, size[0])
             for y in xrange(0, size[1])
             for z in xrange(0, size[2])
-        },
+        ),
     )
 

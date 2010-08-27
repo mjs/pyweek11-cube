@@ -11,10 +11,10 @@ class Collision(object):
         '''
         the locations that the given item occupies
         '''
-        return {
+        return set(
             offset + item.position
             for offset in item.bounds
-        }
+        )
 
     def add(self, item):
         '''

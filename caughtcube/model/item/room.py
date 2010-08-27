@@ -7,38 +7,38 @@ from .wall import WallShape
 
 def RoomBounds(xsize, ysize, zsize):
     bounds = set()
-    bounds.union( {
+    bounds.union( set(
         (-1, y, z)
         for y in xrange(0, ysize)
         for z in xrange(0, zsize)
-    } )
-    bounds.union( {
+    ) )
+    bounds.union( set(
         (xsize, y, z)
         for y in xrange(0, ysize)
         for z in xrange(0, zsize)
-    } )
+    ) )
 
-    bounds.union( {
+    bounds.union( set(
         (x, -1, z)
         for x in xrange(0, xsize)
         for z in xrange(0, zsize)
-    } )
-    bounds.union( {
+    ) )
+    bounds.union( set(
         (x, ysize, z)
         for x in xrange(0, xsize)
         for z in xrange(0, zsize)
-    } )
+    ) )
 
-    bounds.union( {
+    bounds.union( set(
         (x, y, -1)
         for x in xrange(0, xsize)
         for y in xrange(0, ysize)
-    } )
-    bounds.union( {
+    ) )
+    bounds.union( set(
         (x, y, zsize)
         for x in xrange(0, xsize)
         for y in xrange(0, ysize)
-    } )
+    ) )
     
     return bounds
 
