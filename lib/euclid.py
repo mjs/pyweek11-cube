@@ -26,8 +26,8 @@ at http://code.google.com/p/pyeuclid
 '''
 
 __docformat__ = 'restructuredtext'
-__version__ = '$Id: euclid.py 31 2009-02-14 16:04:05Z swiftcoder $'
-__revision__ = '$Revision: 31 $'
+__version__ = '$Id: euclid.py 33 2010-08-27 17:57:57Z tartley $'
+__revision__ = '$Revision: 33 $'
 
 import math
 import operator
@@ -86,6 +86,7 @@ __metaclass__ = _EuclidMetaclass
 
 class Vector2:
     __slots__ = ['x', 'y']
+    __hash__ = None
 
     def __init__(self, x=0, y=0):
         self.x = x
@@ -295,6 +296,7 @@ class Vector2:
 
 class Vector3:
     __slots__ = ['x', 'y', 'z']
+    __hash__ = None
 
     def __init__(self, x=0, y=0, z=0):
         self.x = x

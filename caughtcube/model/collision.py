@@ -11,19 +11,21 @@ class Collision(object):
         '''
         the locations that the given item occupies
         '''
-        return {
-            offset + item.position
-            for offset in item.bounds
-        }
+        if hasattr(item, 'position'):
+            return {
+                tuple(offset + item.position)
+                for offset in item.bounds
+            }
+        else:
+            return item.bounds
+
 
     def add(self, item):
         '''
         add a new item to the world. Raise if it interpenetrates existing items
         '''
         if hasattr(item, 'bounds'):
-            item_occupies = self.occupies(item)
             for location in self.occupies(item):
-                location = tuple(location)
                 if location in self.occupied:
                     raise Exception(
                         'location %s already occupied by %s while adding %s' % (
@@ -36,8 +38,7 @@ class Collision(object):
         remove an item from the world. Raise if it was not present
         '''
         if hasattr(item, 'bounds'):
-            for location in occupies(item):
-                location = tuple(location)
+            for location in self.occupies(item):
                 if self.occupied[location] != item:
                     raise Exception(
                         'location %s not occupied by %s while removing' % (

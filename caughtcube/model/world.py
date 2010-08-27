@@ -10,7 +10,7 @@ from .collision import Collision
 
 class World(object):
     '''
-    World is a container for all of the model's state.
+    World is a container for all of the model state.
     
     Specifically, it's just a collection of all the GameItems that are
     currently in existence. Most of these GameItems are visible objects within
