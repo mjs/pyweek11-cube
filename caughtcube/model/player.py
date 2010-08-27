@@ -8,7 +8,7 @@ from .move import directed_motion
 
 def PlayerShape():
     multi = MultiShape()
-    multi.add(Cube(0.8, white))
+    multi.add(Cube(0.99, white))
     multi.add(Cuboid(30, 0.6, 0.6, (255, 255, 128, 35)))
     multi.add(Cuboid(0.6, 30, 0.6, (255, 255, 128, 35)))
     multi.add(Cuboid(0.6, 0.6, 30, (255, 255, 128, 35)))
