@@ -22,5 +22,5 @@ class ModelView(object):
         glu.gluLookAt(
             position.x, position.y, position.z,
             look_at.x, look_at.y, look_at.z,
-            0, 1, 0)
+            0, 1, -1)
 
