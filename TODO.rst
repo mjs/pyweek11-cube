@@ -19,6 +19,30 @@ GAMEPLAY
   to have to worry about all this collision checking. The flagrant demeter
   violations in this function hint at this.
 
+* Levels as declarations of locations are very difficult for humans to
+  construct. Make level text files as 'nethack style' ASCII maps, eg:
+
+    --start of level file--
+    #############
+    # s #       #
+    #   #   #   #
+    #       # e #
+    #############
+
+    ##         ##
+    # s         #
+        #   #    
+    #         e #
+    ##         ##
+    --end of level file--
+
+  Size of level is inferred on loading by:
+  + Length of first line of file (13 chars) is level length.
+  + Number of contiguous lines until first blank line (5 lines) is level width.
+  + Number of repeated blocks of such lines (here there are 2) is level height.
+    s=player start location
+    e=exit location
+
 * define a bunch of levels as text files
 * An 'end of level' method which removes everything from the world,
   gets the next level and puts the player in it. 
