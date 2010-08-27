@@ -17,6 +17,7 @@ paleblue = white.tinted(cyan, 0.15)
 levels = {
     1: [
         Room(8, 16, 8),
+        # if someone wanted to write a maze-generator, that would be fine by me
         Wall((1, 1, 1), (6, 0, 0), paleblue),
         Wall((6, 1, 1), (1, 0, 1), paleblue),
         Wall((3, 1, 1), (0, 0, 3), paleblue),
