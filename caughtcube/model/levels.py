@@ -1,0 +1,34 @@
+
+from ..util.color import white, cyan
+from .item.exit import Exit
+from .item.room import Room
+from .item.wall import Wall
+
+
+def populate(world, number):
+    for item in levels[number]:
+        world.add(item)
+    start_position = (5, 0, 0)
+    return start_position
+
+
+paleblue = white.tinted(cyan, 0.15)
+
+levels = {
+    1: [
+        Room(8, 16, 8),
+        # if someone wanted to write a maze-generator, that would be fine by me
+        Wall((1, 1, 1), (6, 0, 0), paleblue),
+        Wall((6, 1, 1), (1, 0, 1), paleblue),
+        Wall((3, 1, 1), (0, 0, 3), paleblue),
+        Wall((1, 1, 3), (4, 0, 2), paleblue),
+        Wall((2, 1, 1), (6, 0, 3), paleblue),
+        Wall((5, 1, 1), (2, 0, 5), paleblue),
+        Wall((1, 1, 1), (0, 0, 4), paleblue),
+        Wall((2, 1, 1), (1, 0, 6), paleblue),
+        Wall((1, 1, 1), (6, 0, 6), paleblue),
+        Wall((1, 1, 1), (4, 0, 7), paleblue),
+        Exit((7, 0, -1)),
+    ],
+}
+
