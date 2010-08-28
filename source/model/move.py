@@ -4,6 +4,12 @@ from math import copysign
 from ..util.vectors import tuple_of_ints
 
 
+FLYING = set([
+    (0, 1, 0),
+    (0, -1, 0),
+])
+
+
 class directed_motion(object):
 
     SPEED = 0.06
@@ -16,13 +22,16 @@ class directed_motion(object):
 
 
     def _try_to_move(self, item):
-        # not moving and a move has been requested
-        destination = item.position + self.next_move
-        # TODO: should check all entries in item.bounds + destination,
-        # not just { (0,0,0) } + destination
-        # is item_at_dest one we can move into? (e.g. exit)
-        if self.world.collision.can_move_to(destination):
-            self._start_moving(destination, item)
+        # item is not moving and a move has been requested
+
+        if tuple_of_ints(self.next_move) not in FLYING or item.can_fly:
+            destination = item.position + self.next_move
+            # TODO: should check all entries in item.bounds + destination,
+            # not just { (0,0,0) } + destination
+            # is item_at_dest one we can move into? (e.g. exit)
+            if self.world.collision.can_move_to(destination):
+                self._start_moving(destination, item)
+
         self.next_move = None
 
 

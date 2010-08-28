@@ -11,5 +11,7 @@ def Player(world):
         update=directed_motion(world),
         bounds=set([(0, 0, 0)]),
         collide=True,
+        can_fly=False,
+        can_climb=False,
     )
 
