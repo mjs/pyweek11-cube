@@ -15,16 +15,18 @@ class Collision(object):
         self.occupied = {}
 
     def world_add_item(self, item):
-        position = (0, 0, 0)
-        if hasattr(item, 'position'):
-            position = item.position
-        self.add_item(position, item)
+        if hasattr(item, 'bounds'):
+            position = (0, 0, 0)
+            if hasattr(item, 'position'):
+                position = item.position
+            self.add_item(position, item)
 
     def world_remove_item(self, item):
-        position = (0, 0, 0)
-        if hasattr(item, 'position'):
-            position = item.position
-        self.remove_item(position, item)
+        if hasattr(item, 'bounds'):
+            position = (0, 0, 0)
+            if hasattr(item, 'position'):
+                position = item.position
+            self.remove_item(position, item)
 
 
     def get_items(self, location):

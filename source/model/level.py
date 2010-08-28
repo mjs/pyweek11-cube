@@ -27,11 +27,7 @@ class Level(object):
     def clear(self, world):
         items = world.items.values()
         for item in items:
-            # TODO. remove this special exception for camera,
-            # and instead re-add the camera into world in
-            # gameloop.load_next_level
-            if not hasattr(item, 'look_at'):
-                world.remove(item)
+            world.remove(item)
 
 
     def load(self, world, number):
