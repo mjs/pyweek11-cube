@@ -2,7 +2,9 @@
 GAMEPLAY
 --------
 
-* don't let player move up / down to start with
+* bug: we can move into room edges
+
+* camera should drift along the x axis to stay with the player
 
 * Yellow Gem, collectable. Exit only activates when all gems collected
 
@@ -188,3 +190,4 @@ Collision detection:
 
 * Room and wall color from level files
 
+* don't let player move up / down to start with
