@@ -32,11 +32,10 @@ class Gameloop(object):
 
         self.world = World()
 
-        self.level = Level(self.world)
-        self.level.load(1)
-
         self.player = Player(self.world)
-        self.world.add(self.player, position=self.world.start)
+
+        self.level = Level(self.world)
+        self.load_next_level()
 
         self.camera = GameItem(
             position=origin,
@@ -66,7 +65,7 @@ class Gameloop(object):
                 item.update(item, dt, self.time)
 
         if self.player_at_exit():
-            self.level.next()
+            self.load_next_level()
 
         self.window.invalid = True
 
@@ -78,6 +77,14 @@ class Gameloop(object):
             if dist2_to_exit < EPSILON2:
                 return True
         return False
+
+
+    def load_next_level(self):
+        self.level.next()
+        self.world.add(
+            self.player,
+            position=self.level.player_start_position,
+        )
 
 
     def draw_window(self):
