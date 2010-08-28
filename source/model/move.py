@@ -1,28 +1,7 @@
 
-from math import copysign, cos, sin
-
-from euclid import Vector3
+from math import copysign
 
 from ..util.vectors import tuple_of_ints
-
-
-class Orbit(object):
-
-    def __init__(self, size, frequency=0.2):
-        self.size = size
-        self.frequency = frequency
-        self.center = None
-        self.last_position = None
-
-    def __call__(self, item, dt, time):
-        if item.position != self.last_position:
-            self.center = item.position
-        offset = (
-            sin(time * self.frequency) * self.size[0],
-            cos(time * self.frequency) * self.size[1],
-            0)
-        self.last_position = item.position = self.center + offset
-
 
 
 class directed_motion(object):

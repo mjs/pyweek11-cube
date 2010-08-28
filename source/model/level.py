@@ -1,6 +1,10 @@
 import sys
 from os.path import join
 
+from euclid import Vector3
+
+import pyglet
+
 from ..util import color
 from ..util import path
 from .item.exit import Exit
@@ -13,7 +17,9 @@ sys.path.append(LEVEL_DIR)
 
 
 class Level(object):
-
+    '''
+    Populates a given world object from items read from a level file
+    '''
     def __init__(self, gameloop):
         self.gameloop = gameloop
         self.number = 0
@@ -21,7 +27,14 @@ class Level(object):
 
     def next(self, world):
         self.clear(world)
-        return self.load(world, self.number + 1)
+        if not self.load(world, self.number + 1):
+            self.load(world, 1)
+        pyglet.clock.schedule_once(
+            lambda *_: world.add(
+                self.gameloop.player,
+            ),
+            1.0,
+        )
 
 
     def clear(self, world):
@@ -46,7 +59,7 @@ class Level(object):
 
 
     def get_blocks(self, layout):
-        blocks = layout.split('\n\n')
+        blocks = layout.split('\n~\n')
         return [block.split('\n') for block in blocks]
 
 
@@ -65,8 +78,8 @@ class Level(object):
         for y, block in enumerate(blocks):
             for z, line in enumerate(block):
                 for x, char in enumerate(line):
-                    position = (x, y, z)
-                    if char == ' ':
+                    position = Vector3(x, y, z)
+                    if char in ' ~':
                         pass
                     elif char == '#':
                         world.add(
@@ -77,10 +90,7 @@ class Level(object):
                             )
                         )
                     elif char == 's':
-                        world.add(
-                            self.gameloop.player,
-                            position=position,
-                        )
+                        self.gameloop.player.position=position
                     elif char == 'e':
                         world.add(Exit(position))
                     elif char == 'c':

@@ -30,6 +30,8 @@ class Collision(object):
 
 
     def get_items(self, location):
+        if location is None:
+            return set()
         if isinstance(location, Vector3):
             location = tuple_of_ints(location)
         return self.occupied.get(location, set())
