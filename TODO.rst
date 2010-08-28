@@ -2,10 +2,6 @@
 GAMEPLAY
 --------
 
-* grep for 'TODO' in the code
-
-* camera position and movement from level files
-
 * define a bunch of levels as text files
 
 * Design other gameplay features but each one must be accompanied by a design
@@ -32,6 +28,8 @@ GAMEPLAY
      but can't turn until brought to a stop by collision.
 
 * Add a key to toggle camera movement
+
+* grep for 'TODO' in the code
 
 * refactor. Give up on pure GameItem instances. Just create some subclasses
   for Wall, Camera, Player, etc
@@ -171,4 +169,6 @@ Collision detection:
 
 * When player reaches exit, call 'end of level' method
     * bug: camera is not looking at player on new level
+
+* camera position and movement from level files
 
