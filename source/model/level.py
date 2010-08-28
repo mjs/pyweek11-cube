@@ -21,7 +21,7 @@ class Level(object):
 
     def next(self):
         self.clear()
-        self.load(self.number + 1)
+        return self.load(self.number + 1)
 
 
     def clear(self):
@@ -36,11 +36,11 @@ class Level(object):
 
 
     def load(self, number):
-        # try:
-        level = __import__('level%02d' % (number,))
-        # except ImportError:
-            # print 'No level %d' % (number,)
-            # return False
+        try:
+            level = __import__('level%02d' % (number,))
+        except ImportError:
+            print 'No level %d' % (number,)
+            return False
 
         blocks = self.get_blocks(level.layout)
         room_size = self.get_room_size(blocks)   
@@ -48,6 +48,7 @@ class Level(object):
 
         self.add_items(blocks)
         self.number = number
+        return True
 
 
     def get_blocks(self, layout):

@@ -80,7 +80,9 @@ class Gameloop(object):
 
 
     def load_next_level(self):
-        self.level.next()
+        if not self.level.next():
+            self.level.load(1)
+
         self.world.add(
             self.player,
             position=self.level.player_start_position,
