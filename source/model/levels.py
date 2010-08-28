@@ -1,4 +1,3 @@
-
 from os import path
 from ..util import color
 from .item.exit import Exit
@@ -20,7 +19,7 @@ def populate(world, number):
 
 def get_level_path(number):
     return path.join(LEVEL_DIR, '%02d.lvl' % number)
-    
+
 
 def load_level(fileobj):
     for line in fileobj:
@@ -57,7 +56,6 @@ loaders = {
 def parse_triple(triple_str):
     t = tuple(int(x.strip()) for x in triple_str.split(','))
     assert len(t) == 3
-    return t 
-
+    return t
 
 

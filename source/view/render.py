@@ -5,6 +5,7 @@ import pyglet
 from pyglet.gl import gl
 
 from ..util.color import Color
+from ..util import path
 from .glyph import Glyph
 from .modelview import ModelView
 from .projection import Projection
@@ -41,10 +42,10 @@ class Render(object):
 
         gl.glClearColor(*self.world.sky_color)
 
-        vs = VertexShader(
-            join('caughtcube', 'view', 'shaders', 'lighting.vert'))
-        fs = FragmentShader(
-            join('caughtcube', 'view', 'shaders', 'lighting.frag'))
+        vs_file = join(path.SOURCE, 'view', 'shaders', 'lighting.vert')
+        vs = VertexShader(vs_file)
+        fs_file = join(path.SOURCE, 'view', 'shaders', 'lighting.frag')
+        fs = FragmentShader(fs_file)
         shader = ShaderProgram(vs, fs)
         shader.compile()
         shader.use()
