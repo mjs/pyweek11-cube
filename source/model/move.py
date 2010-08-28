@@ -25,14 +25,6 @@ class Orbit(object):
 
 
 
-def orbit(item, dt, time):
-    item.position = Vector3(
-        4 - sin(time) * 3,
-        7 + cos(time),
-        7.4,
-    )
-
-
 class directed_motion(object):
 
     SPEED = 0.06
