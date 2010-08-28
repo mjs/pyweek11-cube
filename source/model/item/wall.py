@@ -5,7 +5,7 @@ from ..shape import Shape
 from .gameitem import GameItem
 
 
-def WallShape(size, colors, invert=False):
+def WallShape(size, color, invert=False):
     '''
     returns a cuboid shape encompassing worldspace co-ords:
         x: 0 to size[0]-1
@@ -31,7 +31,7 @@ def WallShape(size, colors, invert=False):
     if invert:
         for face in faces:
             face.reverse()
-    return Shape(verts, faces, colors)
+    return Shape(verts, faces, color)
 
 
 def Wall(size, position, color):

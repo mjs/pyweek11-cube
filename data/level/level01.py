@@ -1,4 +1,8 @@
 
+name='Movement'
+room_color = (128, 128, 150, 255)
+wall_color = (148, 178, 170, 255)
+
 layout = '''
 #####e#
 #     #

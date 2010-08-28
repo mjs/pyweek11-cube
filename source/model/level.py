@@ -49,11 +49,19 @@ class Level(object):
         except ImportError:
             return False
 
+        room_color = color.white
+        if hasattr(level, 'room_color'):
+            room_color = level.room_color
+
+        wall_color = color.white
+        if hasattr(level, 'wall_color'):
+            wall_color = level.wall_color
+
         blocks = self.get_blocks(level.layout)
         room_size = self.get_room_size(blocks)   
-        world.add(Room(*room_size))
+        world.add(Room(*room_size, color=room_color))
 
-        self.add_items(world, blocks)
+        self.add_items(world, blocks, room_color, wall_color)
         self.number = number
         return True
 
@@ -74,7 +82,7 @@ class Level(object):
         return (width, height, length)
 
 
-    def add_items(self, world, blocks):
+    def add_items(self, world, blocks, room_color, wall_color):
         for y, block in enumerate(blocks):
             for z, line in enumerate(block):
                 for x, char in enumerate(line):
@@ -86,7 +94,7 @@ class Level(object):
                             Wall(
                                 size=(1, 1, 1),
                                 position=position,
-                                color=color.paleblue,
+                                color=wall_color,
                             )
                         )
                     elif char == 's':

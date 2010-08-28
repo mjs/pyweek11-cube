@@ -1,4 +1,8 @@
 
+name='Familiarity'
+room_color = (28, 28, 28, 255)
+wall_color = (0, 0, 255, 255)
+
 layout = '''
 ###################
 #        #        #
