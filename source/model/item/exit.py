@@ -10,5 +10,6 @@ def Exit(position):
         position=position,
         bounds=set([(0,0,0)]),
         collide=False,
+        exit=True,
     )
 
