@@ -1,8 +1,9 @@
 #! /usr/bin/env python
 
 import sys
-sys.path.append('lib')
+from os.path import join
+sys.path.append(join('source', 'lib'))
 
-from caughtcube.main import main
+from source.main import main
 main()
 

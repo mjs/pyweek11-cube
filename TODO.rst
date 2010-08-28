@@ -2,11 +2,6 @@
 GAMEPLAY
 --------
 
-* refactor: The logic in move.directed_move should probably be at least
-  partially handled by World or somesuch. I don't want every kind of move
-  to have to worry about all this collision checking. The flagrant demeter
-  violations in this function hint at this.
-
 * Levels as declarations of locations are very difficult for humans to
   construct. Make level text files as 'nethack style' ASCII maps, eg:
 
@@ -37,6 +32,10 @@ GAMEPLAY
 * When player reaches exit, call 'end of level' method
   (it would be nice to have multiple interconnected rooms all 'visible' at
   once, but that might be a bit ambitious for now)
+
+* refactor: The logic in move.directed_move should probably be at least
+  partially handled by World or Collision or somesuch.
+  The flagrant demeter violations in this class hint at this.
 
 * Design other gameplay features but each one must be accompanied by a design
   for a level that uses it. Some ideas:
