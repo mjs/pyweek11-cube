@@ -3,6 +3,8 @@ from math import copysign, cos, sin
 
 from euclid import Vector3
 
+from ..util.vectors import round_to_int
+
 
 def orbit(item, dt, time):
     item.position = Vector3(
@@ -36,12 +38,14 @@ class directed_motion(object):
             hasattr(item_at_dest, 'collide') and
             item_at_dest.collide
         ):
-            self._start_moving(destination)
+            self._start_moving(destination, item)
         self.next_move = None
 
 
-    def _start_moving(self, destination):
+    def _start_moving(self, destination, item):
+        self.old_position = tuple(round_to_int(item.position))
         self.destination = destination
+        self.world.collision.occupied[tuple(round_to_int(destination))] = item
         self.velocity = self.next_move * self.SPEED
         self._stop_moving_flag = -copysign(1, sum(self.next_move))
 
@@ -61,6 +65,7 @@ class directed_motion(object):
 
     def _stop_moving(self, item):
         item.position = self.destination
+        del self.world.collision.occupied[self.old_position]
         self.velocity = None
         self.next_move = None
 

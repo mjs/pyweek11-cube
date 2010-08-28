@@ -2,20 +2,6 @@
 GAMEPLAY
 --------
 
-* Player collides with room and wall obstacles
-    * bug: player cannot move into exit location. It it embedded in the wall,
-      which I would like to mean 'remove the wall from the world.collision
-      collection at that location'. How to implement? How about: Exit gains
-      a bounds, but is flagged as 'collide=False'. When doing start of movement
-      collision check, we don't just look for occupied locations, but we look
-      for the 'solid' flag on the object that occupies that location.
-      Also, when item is added to world, if not solid then it overrides
-      any previous solid entry.
-    * bug, player cannot move back into player start location, because the
-      following is not implemented:
-        * When move starts, intended destination must be marked as occupied by
-          item. When move complete, old position must be marked as unoccupied.
-
 * refactor: The logic in move.directed_move should probably be at least
   partially handled by World or somesuch. I don't want every kind of move
   to have to worry about all this collision checking. The flagrant demeter
@@ -150,6 +136,18 @@ Collision detection:
     * bug, collision with room does not work (was using Vector3s as dict
       keys. They should be unhashable. Fixed in project Euclid and we now
       use equivalent tuple as the dict key)
+    * bug: player cannot move into exit location. It it embedded in the wall,
+      which I would like to mean 'remove the wall from the world.collision
+      collection at that location'. How to implement? How about: Exit gains
+      a bounds, but is flagged as 'collide=False'. When doing start of movement
+      collision check, we don't just look for occupied locations, but we look
+      for the 'solid' flag on the object that occupies that location.
+      Also, when item is added to world, if not solid then it overrides
+      any previous solid entry.
+    * bug, player cannot move back into player start location, because the
+      following is not implemented:
+        * When move starts, intended destination must be marked as occupied by
+          item. When move complete, old position must be marked as unoccupied.
 
 * level generator populates levels by loading text files
 
