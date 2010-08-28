@@ -1,11 +1,12 @@
-from os import path
 from ..util import color
+from ..util import path
 from .item.exit import Exit
 from .item.room import Room
 from .item.wall import Wall
 
 
-LEVEL_DIR = path.join(path.dirname(__file__), '..', '..', 'data')
+LEVEL_DIR = path.DATA
+
 
 def populate(world, number):
     start_position = (5, 5, 5)

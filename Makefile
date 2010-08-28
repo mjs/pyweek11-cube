@@ -5,7 +5,7 @@
 # I run these under Ubuntu bash, or on Windows with Cygwin binaries on the PATH
 
 
-PACKAGE := caughtcube
+PACKAGE := source
 VERSION := `python -c "from ${PACKAGE}.version import version; print version"`
 RUN = run.py
 
@@ -26,7 +26,7 @@ clean:
 
 
 tags:
-	ctags -R ${PACKAGE} lib
+	ctags -R ${PACKAGE}
 .PHONY: tags
 
 
