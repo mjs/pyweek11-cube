@@ -2,6 +2,10 @@
 GAMEPLAY
 --------
 
+* don't let player move up / down to start with
+
+* Yellow Gem, collectable. Exit only activates when all gems collected
+
 * don't let player move up/down unless they have collected the blue gem
   on the current level
 
@@ -11,7 +15,6 @@ GAMEPLAY
 
 * Design other gameplay features but each one must be accompanied by a design
   for a level that uses it. Some ideas:
-   * Yellow Gem, collectable. Exit only activates when all gems collected
    * Green Gem, lets you climb up and down
    * Blue Gem, lets you move up and down.
    * fence: like a wall, but apperance is less occluding, so that player
