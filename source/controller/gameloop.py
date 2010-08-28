@@ -4,14 +4,14 @@ import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
 
+from ..model.cameraman import CameraMan
+from ..model.item.gameitem import GameItem
+from ..model.item.player import Player
+from ..model.level import Level
+from ..model.world import World
+from ..view.render import Render
+from ..util.vectors import origin, dist2_from_int_ords, EPSILON2
 from .keyhandler import KeyHandler
-from .model.cameraman import CameraMan
-from .model.item.gameitem import GameItem
-from .model.item.player import Player
-from .model.level import Level
-from .model.world import World
-from .view.render import Render
-from .util.vectors import origin, dist2_from_int_ords, EPSILON2
 
 
 class Gameloop(object):

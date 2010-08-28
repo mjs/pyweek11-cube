@@ -1,8 +1,8 @@
 from __future__ import division
 import sys
 
-from .gameloop import Gameloop
-from .options import Options
+from .controller.gameloop import Gameloop
+from .controller.options import Options
 
 def run_game():
     options = Options(sys.argv)

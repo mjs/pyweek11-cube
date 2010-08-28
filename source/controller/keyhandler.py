@@ -3,7 +3,7 @@ from __future__ import division
 
 from pyglet.window import key 
 
-from .util.vectors import (
+from ..util.vectors import (
     neg_x_axis, neg_y_axis, neg_z_axis, x_axis, y_axis, z_axis,
 )
 
