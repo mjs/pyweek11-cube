@@ -48,8 +48,10 @@ class Level(object):
 
 
     def clear(self):
-        for item in self.world:
-            self.world.remove(item)
+        items = self.world.items.values()
+        for item in items:
+            if not hasattr(item, 'look_at'):
+                self.world.remove(item)
         self.world.start = None
 
 
@@ -79,4 +81,9 @@ class Level(object):
                 color=color.paleblue,
             )
         )
+
+
+    def next(self):
+        self.clear()
+        self.load(self.number + 1)
 

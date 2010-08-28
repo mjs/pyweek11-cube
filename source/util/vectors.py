@@ -1,8 +1,9 @@
 
-from math import floor
-
 from euclid import Vector3
 
+
+EPSILON = 1e-7
+EPSILON2 = EPSILON ** 2
 
 origin = Vector3(0, 0, 0)
 x_axis = Vector3(1, 0, 0)
@@ -13,16 +14,14 @@ neg_y_axis = Vector3(0, -1, 0)
 neg_z_axis = Vector3(0, 0, -1)
 
 
-def round_to_int(v):
-    return Vector3(
-        floor(v.x + 0.5),
-        floor(v.y + 0.5),
-        floor(v.z + 0.5),
+def tuple_of_ints(vec3):
+    return (
+        int(round(vec3.x)),
+        int(round(vec3.y)),
+        int(round(vec3.z)),
     )
 
-def round_down_to_int(v):
-    return Vector3(
-        floor(v.x),
-        floor(v.y),
-        floor(v.z),
-    )
+
+def dist2_from_int_ords(vector):
+    return (vector - tuple_of_ints(vector)).magnitude_squared()
+

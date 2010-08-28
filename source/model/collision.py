@@ -1,4 +1,8 @@
 
+from euclid import Vector3
+
+from ..util.vectors import tuple_of_ints
+
 
 class Collision(object):
     '''
@@ -6,62 +10,49 @@ class Collision(object):
     '''
 
     def __init__(self, world):
-        world.item_added += self.add
-        world.item_removed += self.remove
+        world.item_added += self.world_add_item
+        world.item_removed += self.world_remove_item
         self.occupied = {}
 
-
-    def occupies(self, item):
-        '''
-        the locations that the given item occupies
-        '''
+    def world_add_item(self, item):
+        position = (0, 0, 0)
         if hasattr(item, 'position'):
-            return set(
-                tuple(item.position + offset)
-                for offset in item.bounds
-            )
-        else:
-            return item.bounds
+            position = item.position
+        self.add_item(position, item)
+
+    def world_remove_item(self, item):
+        position = (0, 0, 0)
+        if hasattr(item, 'position'):
+            position = item.position
+        self.remove_item(position, item)
 
 
-    def add(self, item):
-        '''
-        add a new item to the world. Raise if it interpenetrates existing items
-        '''
-        if hasattr(item, 'bounds'):
-            for location in self.occupies(item):
-                if location in self.occupied:
-                    existing = self.occupied[location]
-                    if (
-                        hasattr(existing, 'collide') and
-                        hasattr(item, 'collide') and
-                        existing.collide != item.collide
-                    ):
-                        self.occupied[location] = (
-                            item
-                            if existing.collide
-                            else existing
-                        )
-                    else:
-                        raise Exception(
-                            'location %s already occupied '
-                            'by %s while adding %s' % (
-                                location, item, self.occupied[location]
-                            ) )
-                else:
-                    self.occupied[location] = item
+    def get_items(self, location):
+        if isinstance(location, Vector3):
+            location = tuple_of_ints(location)
+        return self.occupied.get(location, set())
 
 
-    def remove(self, item):
-        '''
-        remove an item from the world. Raise if it was not present
-        '''
-        if hasattr(item, 'bounds'):
-            for location in self.occupies(item):
-                if self.occupied[location] != item:
-                    raise Exception(
-                        'location %s not occupied by %s while removing' % (
-                            location, item
-                    ) )
-                del self.occupied[location]
+    def add_item(self, location, item):
+        if isinstance(location, Vector3):
+            location = tuple_of_ints(location)
+        existing = self.occupied.get(location, set())
+        existing.add(item)
+        self.occupied[location] = existing
+
+
+    def remove_item(self, location, item):
+        if isinstance(location, Vector3):
+            location = tuple_of_ints(location)
+        existing = self.occupied.get(location, set())
+        existing.remove(item)
+        self.occupied[location] = existing
+
+
+    def can_move_to(self, location):
+        return not [ 
+            item for item in self.get_items(location)
+            if hasattr(item, 'collide') and item.collide
+        ]
+
 

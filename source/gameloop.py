@@ -10,7 +10,7 @@ from .model.level import Level
 from .model.world import World
 from .model.move import orbit
 from .view.render import Render
-from .util.vectors import origin
+from .util.vectors import origin, dist2_from_int_ords, EPSILON2
 
 
 class Gameloop(object):
@@ -61,8 +61,23 @@ class Gameloop(object):
         dt = min(dt, 1 / 30)
         self.time += dt
 
-        self.world.update(dt, self.time)
+        for item in self.world:
+            if hasattr(item, 'update'):
+                item.update(item, dt, self.time)
+
+        if self.player_at_exit():
+            self.level.next()
+
         self.window.invalid = True
+
+
+    def player_at_exit(self):
+        items = self.world.collision.get_items(self.player.position)
+        if any(hasattr(item, 'exit') for item in items):
+            dist2_to_exit = dist2_from_int_ords(self.player.position)
+            if dist2_to_exit < EPSILON2:
+                return True
+        return False
 
 
     def draw_window(self):

@@ -3,7 +3,7 @@ from math import copysign, cos, sin
 
 from euclid import Vector3
 
-from ..util.vectors import round_to_int
+from ..util.vectors import tuple_of_ints
 
 
 def orbit(item, dt, time):
@@ -30,22 +30,16 @@ class directed_motion(object):
         destination = item.position + self.next_move
         # TODO: should check all entries in item.bounds + destination,
         # not just { (0,0,0) } + destination
-        item_at_dest = self.world.collision.occupied.get(
-            tuple(destination), None)
         # is item_at_dest one we can move into? (e.g. exit)
-        if not (
-            item_at_dest and
-            hasattr(item_at_dest, 'collide') and
-            item_at_dest.collide
-        ):
+        if self.world.collision.can_move_to(destination):
             self._start_moving(destination, item)
         self.next_move = None
 
 
     def _start_moving(self, destination, item):
-        self.old_position = tuple(round_to_int(item.position))
+        self.old_position = tuple(tuple_of_ints(item.position))
         self.destination = destination
-        self.world.collision.occupied[tuple(round_to_int(destination))] = item
+        self.world.collision.add_item(destination, item)
         self.velocity = self.next_move * self.SPEED
         self._stop_moving_flag = -copysign(1, sum(self.next_move))
 
@@ -65,7 +59,7 @@ class directed_motion(object):
 
     def _stop_moving(self, item):
         item.position = self.destination
-        del self.world.collision.occupied[self.old_position]
+        self.world.collision.remove_item(self.old_position, item)
         self.velocity = None
         self.next_move = None
 

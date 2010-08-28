@@ -2,10 +2,14 @@
 GAMEPLAY
 --------
 
-* An 'end of level' method which removes everything from the world,
-  gets the next level and puts the player in it. 
 * When player reaches exit, call 'end of level' method
+    * bug: camera is not looking at player on new level
+
 * define a bunch of levels as text files
+
+* camera position and movement should be determined by room size, current
+  player location.
+* Add a key to toggle camera movement
 
 * refactor: The logic in move.directed_move should probably be at least
   partially handled by World or Collision or somesuch.
@@ -13,6 +17,9 @@ GAMEPLAY
 
 * Design other gameplay features but each one must be accompanied by a design
   for a level that uses it. Some ideas:
+   * fence: like a wall, but apperance is less occluding, so that player
+     can be seen behind it. Perhaps a 3D cross?
+   * rock: can be pushed around. When pushed off an edge, falls to fill a pit?
    * Gate, shaped like a nasty pointy portcullis, and a button in the floor
      that opens and closes it
    * 'sticky' things. If player gets adjacent to them, they stick to the
@@ -43,7 +50,8 @@ ENGINE
 * when gameitems added to the world are intended to be unmoving ('static'),
   we remove their shape attribute, and append it to a single 'world' multishape
   instead. This allows all static gameitems to be drawn by Render in a single
-  glDrawElements call, which is much faster.
+  glDrawElements call, which is much faster, and will allow very large levels
+  at 60fps
 
 
 VERY OPTIONAL or SPECULATIVE
@@ -149,4 +157,14 @@ Collision detection:
   + Number of repeated blocks of such lines (here there are 2) is level height.
     s=player start location
     e=exit location
+
+* An 'end of level' method which removes everything from the world,
+  gets the next level and puts the player in it. (Done: Level.next())
+
+* refactor: Collision should store a SET OF items at each location
+    {location: set of items}
+  then get_itemS gets the set or an empty set
+  set_item adds the item to the set
+  collision check checks if any(item.solid for item in get_items(location))
+
 

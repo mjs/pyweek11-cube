@@ -3,7 +3,6 @@ from euclid import Vector3
 
 from ..util.color import Color
 from ..util.event import Event
-from ..util.vectors import round_to_int
 
 from .collision import Collision
 
@@ -22,7 +21,6 @@ class World(object):
     the view package, so we fire events when items are added or removed from
     the world, so that the view can react accordingly.
     '''
-
     sky_color = Color(0.0, 0.1, 0.3, 1.0)
 
     def __init__(self):
@@ -39,17 +37,10 @@ class World(object):
             if not isinstance(position, Vector3):
                 position = Vector3(*position)
             item.position = position
-        if hasattr(item, 'position'):
-            item.position = round_to_int(item.position)
         self.items[item.id] = item
         self.item_added.fire(item)
 
     def remove(self, item):
         del self.items[item.id]
         self.item_removed.fire(item)
-
-    def update(self, dt, time):
-        for item in self.items.itervalues():
-            if hasattr(item, 'update'):
-                item.update(item, dt, time)
 
