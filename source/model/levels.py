@@ -1,3 +1,6 @@
+import sys
+from os.path import join
+
 from ..util import color
 from ..util import path
 from .item.exit import Exit
@@ -5,58 +8,70 @@ from .item.room import Room
 from .item.wall import Wall
 
 
-LEVEL_DIR = path.DATA
+LEVEL_DIR = join(path.DATA, 'level')
+sys.path.append(LEVEL_DIR)
 
 
 def populate(world, number):
-    start_position = (5, 5, 5)
-    for item in load_level(file(get_level_path(number))):
-        if isinstance(item, tuple):
-            start_position = item
-        else:
-            world.add(item)
-    return start_position
+    level = Level(number)
+    level.create(world)
 
 
-def get_level_path(number):
-    return path.join(LEVEL_DIR, '%02d.lvl' % number)
+class Level(object):
+
+    def __init__(self, number):
+        self.number = number
 
 
-def load_level(fileobj):
-    for line in fileobj:
-        parts = map(str.strip, line.split(':'))
-        yield loaders[parts[0]](*parts[1:])
+    def create(self, world):
+        level = __import__('level%02d' % (self.number,))
+
+        blocks = self.get_blocks(level.layout)
+        room_size = self.get_room_size(blocks)   
+        world.add(Room(*room_size))
+
+        self.add_items(world, blocks)
 
 
-def load_player(a):
-    return parse_triple(a)
+    def get_blocks(self, layout):
+        blocks = layout.split('\n\n')
+        return [block.split('\n') for block in blocks]
 
 
-def load_room(dim):
-    return Room(*parse_triple(dim))
+    def get_room_size(self, blocks):
+        height = len(blocks)
+        length = max(len(block) for block in blocks)
+        width = max(
+            len(line)
+            for block in blocks
+            for line in block
+        )
+        return (width, height, length)
 
 
-def load_wall(a, b, color_name):
-    return Wall(parse_triple(a),
-                parse_triple(b),
-                getattr(color, color_name))
+    def add_items(self, world, blocks):
+        for y, block in enumerate(blocks):
+            for z, line in enumerate(block):
+                for x, char in enumerate(line):
+                    position = (x, y, z)
+                    if char == ' ':
+                        pass
+                    elif char == '#':
+                        self.add_wall(world, position)
+                    elif char == 's':
+                        world.start = position
+                    elif char == 'e':
+                        world.add(Exit(position))
+                    else:
+                        print 'unknown', repr(char)
 
 
-def load_exit(where):
-    return Exit(parse_triple(where))
-
-
-loaders = {
-    'player': load_player,
-    'room': load_room,
-    'wall': load_wall,
-    'exit': load_exit,
-}
-
-
-def parse_triple(triple_str):
-    t = tuple(int(x.strip()) for x in triple_str.split(','))
-    assert len(t) == 3
-    return t
-
+    def add_wall(self, world, position):
+        world.add(
+            Wall(
+                size=(1, 1, 1),
+                position=position,
+                color=color.paleblue,
+            )
+        )
 
