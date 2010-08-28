@@ -32,10 +32,10 @@ class Gameloop(object):
 
         self.world = World()
 
-        start_pos = populate(self.world, 1)
+        populate(self.world, 1)
 
         self.player = Player(self.world)
-        self.world.add(self.player, position=start_pos)
+        self.world.add(self.player, position=self.world.start)
 
         self.camera = GameItem(
             position=origin,
