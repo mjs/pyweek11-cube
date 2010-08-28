@@ -1,23 +1,10 @@
 
-from itertools import izip, repeat
+from itertools import repeat
 
 from euclid import Matrix4, Vector3
 
 from ..util.color import Color
 
-
-# TODO (very low priority): make this a method of 'face'.
-def tessellate_face(indices):
-    '''
-    Return this face tesselated into a list of triangular faces, expressed
-    as integer indices. The triangles will be wound in the same direction
-    as the original poly. Does not work for concave faces.
-    e.g. Face(verts, [0, 1, 2, 3, 4]) -> [[0, 1, 2], [0, 2, 3], [0, 3, 4]]
-    '''
-    return (
-        [indices[0], indices[index], indices[index + 1]]
-        for index in xrange(1, len(indices) - 1)
-    )
 
 
 class Face(object):

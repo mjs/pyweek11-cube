@@ -3,7 +3,6 @@ from itertools import chain, repeat
 
 from pyglet.gl import gl
 
-from ..model.shape import tessellate_face
 from ..util.color import Color
 
 
@@ -14,6 +13,19 @@ def glarray(gltype, seq, length):
     '''
     arraytype = gltype * length
     return arraytype(*seq)
+
+
+def tessellate(indices):
+    '''
+    Return the indices of the given face tesselated into a list of triangles,
+    expressed as integer indices. The triangles will be wound in the
+    same direction as the original poly. Does not work for concave faces.
+    e.g. Face(verts, [0, 1, 2, 3, 4]) -> [[0, 1, 2], [0, 2, 3], [0, 3, 4]]
+    '''
+    return (
+        [indices[0], indices[index], indices[index + 1]]
+        for index in xrange(1, len(indices) - 1)
+    )
 
 
 class Glyph(object):
@@ -77,7 +89,7 @@ class Glyph(object):
         face_offset = 0
         for face in faces:
             indices = xrange(face_offset, face_offset + len(face))
-            glindices.extend(chain(*tessellate_face(indices)))
+            glindices.extend(chain(*tessellate(indices)))
             face_offset += len(face)
         self.glindex_type = self.get_glindex_type()
         return glarray(self.glindex_type, glindices, len(glindices))
