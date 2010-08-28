@@ -51,7 +51,7 @@ green = Color(0, 255, 0, 255)
 cyan = Color(0, 255, 255, 255)
 blue = Color(0, 0, 255, 255)
 magenta = Color(255, 0, 255, 255)
-paleblue = white.tinted(cyan, 0.15)
+paleblue = white.tinted(grey, 0.55).tinted(cyan, 0.05)
 
 all_colors = [
     red, orange, yellow, green, cyan, blue, magenta, white, grey, black, paleblue]

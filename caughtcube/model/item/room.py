@@ -1,6 +1,6 @@
 from __future__ import division
 
-from ...util.color import white, cyan
+from ...util.color import paleblue, white
 from .gameitem import GameItem
 from .wall import WallShape
 
@@ -38,9 +38,13 @@ def Room(xsize, ysize, zsize):
     player (or any other 1.0 sized object) can sit at any location in
     the room and not intersect with the room walls
     '''
-    paleblue = white.tinted(cyan, 0.1)
     return GameItem(
-        shape=WallShape((xsize, ysize, zsize), paleblue, invert=True),
+        shape=WallShape(
+            (xsize, ysize, zsize),
+            paleblue.tinted(white, 0.10),
+            invert=True
+        ),
         bounds=RoomBounds(xsize, ysize, zsize),
+        collide=True,
     )
 

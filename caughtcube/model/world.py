@@ -29,7 +29,7 @@ class World(object):
         self.items = {}
         self.item_added = Event()
         self.item_removed = Event()
-        self.collision = Collision()
+        self.collision = Collision(self)
 
     def __iter__(self):
         return self.items.itervalues()
@@ -41,14 +41,11 @@ class World(object):
             item.position = position
         if hasattr(item, 'position'):
             item.position = round_to_int(item.position)
-
         self.items[item.id] = item
-        self.collision.add(item)
         self.item_added.fire(item)
 
     def remove(self, item):
         del self.items[item.id]
-        self.collision.remove(item)
         self.item_removed.fire(item)
 
     def update(self, dt, time):

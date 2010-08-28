@@ -5,7 +5,9 @@ class Collision(object):
     detects if any objects in the world collide
     '''
 
-    def __init__(self):
+    def __init__(self, world):
+        world.item_added += self.add
+        world.item_removed += self.remove
         self.occupied = {}
 
 
@@ -29,11 +31,25 @@ class Collision(object):
         if hasattr(item, 'bounds'):
             for location in self.occupies(item):
                 if location in self.occupied:
-                    raise Exception(
-                        'location %s already occupied by %s while adding %s' % (
-                            location, item, self.occupied[location]
-                        ) )
-                self.occupied[location] = item
+                    existing = self.occupied[location]
+                    if (
+                        hasattr(existing, 'collide') and
+                        hasattr(item, 'collide') and
+                        existing.collide != item.collide
+                    ):
+                        self.occupied[location] = (
+                            item
+                            if existing.collide
+                            else existing
+                        )
+                    else:
+                        raise Exception(
+                            'location %s already occupied '
+                            'by %s while adding %s' % (
+                                location, item, self.occupied[location]
+                            ) )
+                else:
+                    self.occupied[location] = item
 
 
     def remove(self, item):

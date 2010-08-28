@@ -10,5 +10,6 @@ def Player(world):
         shape=Cube(0.99, white),
         update=directed_motion(world),
         bounds=set([(0, 0, 0)]),
+        collide=True,
     )
 

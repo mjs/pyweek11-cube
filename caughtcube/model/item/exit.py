@@ -8,5 +8,7 @@ def Exit(position):
     return GameItem(
         shape=Cube(1.01, black),
         position=position,
+        bounds=set([(0,0,0)]),
+        collide=False,
     )
 
