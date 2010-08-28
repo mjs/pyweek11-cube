@@ -8,7 +8,7 @@ from .model.item.gameitem import GameItem
 from .model.item.player import Player
 from .model.level import Level
 from .model.world import World
-from .model.move import orbit
+from .model.move import Orbit
 from .view.render import Render
 from .util.vectors import origin, dist2_from_int_ords, EPSILON2
 
@@ -31,18 +31,14 @@ class Gameloop(object):
         self.window.on_draw = self.draw_window
 
         self.world = World()
-
         self.player = Player(self.world)
-
-        self.level = Level(self.world)
-        self.load_next_level()
-
         self.camera = GameItem(
             position=origin,
             look_at=self.player,
-            update=orbit,
+            update=Orbit((3,2,0)),
         )
-        self.world.add(self.camera)
+        self.level = Level(self)
+        self.load_next_level()
 
         self.render = Render(self.world, self.window, self.camera)
         self.render.init()
@@ -80,13 +76,8 @@ class Gameloop(object):
 
 
     def load_next_level(self):
-        if not self.level.next():
-            self.level.load(1)
-
-        self.world.add(
-            self.player,
-            position=self.level.player_start_position,
-        )
+        if not self.level.next(self.world):
+            self.level.load(self.world, 1)
 
 
     def draw_window(self):

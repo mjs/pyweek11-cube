@@ -2,18 +2,11 @@
 GAMEPLAY
 --------
 
-* When player reaches exit, call 'end of level' method
-    * bug: camera is not looking at player on new level
+* grep for 'TODO' in the code
+
+* camera position and movement from level files
 
 * define a bunch of levels as text files
-
-* camera position and movement should be determined by room size, current
-  player location.
-* Add a key to toggle camera movement
-
-* refactor: The logic in move.directed_move should probably be at least
-  partially handled by World or Collision or somesuch.
-  The flagrant demeter violations in this class hint at this.
 
 * Design other gameplay features but each one must be accompanied by a design
   for a level that uses it. Some ideas:
@@ -38,20 +31,29 @@ GAMEPLAY
      in the direction pressed before colliding. Good for getting around fast,
      but can't turn until brought to a stop by collision.
 
+* Add a key to toggle camera movement
+
+* refactor. Give up on pure GameItem instances. Just create some subclasses
+  for Wall, Camera, Player, etc
+
+* refactor: The logic in move.directed_move should probably be at least
+  partially handled by World or Collision or somesuch.
+  The flagrant demeter violations in this class hint at this.
+
 
 ENGINE
 ------
-
-* Add bitmaps to our fragment shader
-    * give room walls a very low resolution bitmap (one pixel is same size
-      as player)
-    * add the word 'EXIT' on the horizontal faces of the exit, a la Gauntlet
 
 * when gameitems added to the world are intended to be unmoving ('static'),
   we remove their shape attribute, and append it to a single 'world' multishape
   instead. This allows all static gameitems to be drawn by Render in a single
   glDrawElements call, which is much faster, and will allow very large levels
   at 60fps
+
+* Add bitmaps to our fragment shader
+    * give room walls a very low resolution bitmap (one pixel is same size
+      as player)
+    * add the word 'EXIT' on the horizontal faces of the exit, a la Gauntlet
 
 
 VERY OPTIONAL or SPECULATIVE
@@ -167,4 +169,6 @@ Collision detection:
   set_item adds the item to the set
   collision check checks if any(item.solid for item in get_items(location))
 
+* When player reaches exit, call 'end of level' method
+    * bug: camera is not looking at player on new level
 
