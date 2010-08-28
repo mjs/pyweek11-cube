@@ -41,6 +41,9 @@ class Glyph(object):
         self.glnormals = None
 
 
+    def __repr__(self):
+        return '<Glyph %d verts>' % (self.num_glvertices,)
+
     def get_num_glvertices(_, faces):
         return len(list(chain(*faces)))
 
