@@ -1,6 +1,13 @@
 A game written for PyWeek #11, the 'write a game in Python in a week'
 competition. pyweek.org
 
+Most ideas are unfinished. It's pretty much just a cube moving around a 3D
+maze, with some funky music. :-(
+
+
+RUNNING THE GAME
+----------------
+
 Run from the command line using:
 
     python -O run.py [options]
