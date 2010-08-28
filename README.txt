@@ -7,9 +7,12 @@ Run from the command line using:
 
 Where options are:
 
-    -f --fullscreen: Run fullscreen, at current desktop resolution, instead of
-                     in a window.
-    
+    --novsync, disable vsync
+    --fullscreen or -f, run fullscreen instead of windowed
+    --print-fps, print fps to stdout on exit
+    --fps, display fps on screen
+    --version, display version on stdout and exit
+
 As always for pyglet / OpenGL programs, the -O flag is important, it can
 greatly improve the framerate.
 
@@ -22,9 +25,11 @@ To be able to run, first you'll need:
     Windows or Linux (maybe Macs too, I haven't tried)
     Python 2.6 or 2.7 (from python.org)
     Pyglet 1.1.4 (easy_install or pip works, or from pyglet.org)
+        with AVBin if you want sound and music.
 
-The version numbers for everything except Python probably aren't crucial, but
-those are the versions I'm running.
+AVBin is included in the Windows binary download of Pyglet. Otherwise you'll
+have to download it from here:
+http://code.google.com/p/avbin/downloads/list
 
 
 THE GAME
@@ -35,8 +40,7 @@ space?
 
 Keys:
     W A S D - forward left right back
-    Up Down - up down
-    Tab - switch camera view
+    Up Down - up down, when you are granted the ability to move vertically
 
 
 DEVELOPMENT
@@ -90,4 +94,8 @@ which have transformed my hobbyist game coding. We all owe you, big time.
 Thanks to Chris DeLeon, for advice, moral support, and examples of how to do it
 right.
 
+Music is I Wonder If God Was Sleeping (Transcendence Edit),
+(cc) 2008 scottaltham
+Licensed to the public under http://creativecommons.org/licenses/by-nc/3.0/
+Verify at http://ccmixter.org/files/scottaltham/18129
 
