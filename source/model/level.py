@@ -12,23 +12,42 @@ LEVEL_DIR = join(path.DATA, 'level')
 sys.path.append(LEVEL_DIR)
 
 
-
 class Level(object):
 
     def __init__(self, world):
         self.world = world
-        self.number = None
+        self.number = 0
+
+
+    def next(self):
+        self.clear()
+        self.load(self.number + 1)
+
+
+    def clear(self):
+        items = self.world.items.values()
+        for item in items:
+            # TODO. remove this special exception for camera,
+            # and instead re-add the camera into world in
+            # gameloop.load_next_level
+            if not hasattr(item, 'look_at'):
+                self.world.remove(item)
+        self.world.start = None
 
 
     def load(self, number):
-        self.number = number
-        level = __import__('level%02d' % (self.number,))
+        # try:
+        level = __import__('level%02d' % (number,))
+        # except ImportError:
+            # print 'No level %d' % (number,)
+            # return False
 
         blocks = self.get_blocks(level.layout)
         room_size = self.get_room_size(blocks)   
         self.world.add(Room(*room_size))
 
         self.add_items(blocks)
+        self.number = number
 
 
     def get_blocks(self, layout):
@@ -47,14 +66,6 @@ class Level(object):
         return (width, height, length)
 
 
-    def clear(self):
-        items = self.world.items.values()
-        for item in items:
-            if not hasattr(item, 'look_at'):
-                self.world.remove(item)
-        self.world.start = None
-
-
     def add_items(self, blocks):
         for y, block in enumerate(blocks):
             for z, line in enumerate(block):
@@ -65,7 +76,7 @@ class Level(object):
                     elif char == '#':
                         self.add_wall(position)
                     elif char == 's':
-                        self.world.start = position
+                        self.player_start_position = position
                     elif char == 'e':
                         self.world.add(Exit(position))
                     else:
@@ -81,9 +92,4 @@ class Level(object):
                 color=color.paleblue,
             )
         )
-
-
-    def next(self):
-        self.clear()
-        self.load(self.number + 1)
 
