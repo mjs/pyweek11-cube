@@ -1,6 +1,5 @@
 from __future__ import division
 
-from ...util.color import paleblue, white
 from .gameitem import GameItem
 from .wall import WallShape
 
@@ -28,7 +27,7 @@ def RoomBounds(xsize, ysize, zsize):
     return bounds
 
 
-def Room(xsize, ysize, zsize):
+def Room(xsize, ysize, zsize, color):
     '''
     Interior of room goes from:
         x: 0 to xsize-1
@@ -41,7 +40,7 @@ def Room(xsize, ysize, zsize):
     return GameItem(
         shape=WallShape(
             (xsize, ysize, zsize),
-            paleblue.tinted(white, 0.10),
+            color=color,
             invert=True
         ),
         bounds=RoomBounds(xsize, ysize, zsize),

@@ -2,10 +2,18 @@
 GAMEPLAY
 --------
 
+* don't let player move up/down unless they have collected the blue gem
+  on the current level
+
 * define a bunch of levels as text files
+
+* add sound effects
 
 * Design other gameplay features but each one must be accompanied by a design
   for a level that uses it. Some ideas:
+   * Yellow Gem, collectable. Exit only activates when all gems collected
+   * Green Gem, lets you climb up and down
+   * Blue Gem, lets you move up and down.
    * fence: like a wall, but apperance is less occluding, so that player
      can be seen behind it. Perhaps a 3D cross?
    * rock: can be pushed around. When pushed off an edge, falls to fill a pit?
@@ -27,7 +35,8 @@ GAMEPLAY
      in the direction pressed before colliding. Good for getting around fast,
      but can't turn until brought to a stop by collision.
 
-* Add a key to toggle camera movement
+* Add a key to toggle camera movement (tab)
+* Add a key to toggle fullscreen (alt-enter)
 
 * grep for 'TODO' in the code
 
@@ -171,4 +180,8 @@ Collision detection:
     * bug: camera is not looking at player on new level
 
 * camera position and movement from level files
+
+* add music
+
+* Room and wall color from level files
 
