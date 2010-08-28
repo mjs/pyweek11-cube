@@ -1,4 +1,4 @@
-room: 8, 16, 8
+room: 8, 9, 8
 wall: 1, 1, 1 : 6, 0, 0 : paleblue
 wall: 6, 1, 1 : 1, 0, 1 : paleblue
 wall: 3, 1, 1 : 0, 0, 3 : paleblue
@@ -10,4 +10,4 @@ wall: 2, 1, 1 : 1, 0, 6 : paleblue
 wall: 1, 1, 1 : 6, 0, 6 : paleblue
 wall: 1, 1, 1 : 4, 0, 7 : paleblue
 exit: 7, 0, -1
-player: 5, 3, 0
+player: 5, 0, 0

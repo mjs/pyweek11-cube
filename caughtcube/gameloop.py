@@ -47,6 +47,7 @@ class Gameloop(object):
         self.render = Render(self.world, self.window, self.camera)
         self.render.init()
 
+
     def run(self):
         pyglet.clock.schedule(self.update)
         self.window.set_visible()

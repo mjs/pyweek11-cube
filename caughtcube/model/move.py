@@ -7,7 +7,7 @@ from euclid import Vector3
 def orbit(item, dt, time):
     item.position = Vector3(
         4 - sin(time) * 3,
-        8 + cos(time),
+        7 + cos(time),
         7.4,
     )
 

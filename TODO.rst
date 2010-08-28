@@ -53,7 +53,10 @@ GAMEPLAY
 * Design other gameplay features but each one must be accompanied by a design
   for a level that uses it. Some ideas:
    * Gate, shaped like a nasty pointy portcullis, and a button in the floor
-     that opens it
+     that opens and closes it
+   * 'sticky' things. If player gets adjacent to them, they stick to the
+     player, and move alongside the player from then on, effectively increasing
+     the bounds of the player, making it harder to navigate small corridors.
    * Things that chase the player? Rolling balls? Pacman-ghost shapes?
      (random thought: Should we give up and just write 3D rendered 'pacman',
      with occasional gameplay tweaks to exploit third dimension? It does fit
