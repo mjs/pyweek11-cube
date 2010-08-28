@@ -6,7 +6,7 @@ from pyglet.window import Window
 
 from .model.item.gameitem import GameItem
 from .model.item.player import Player
-from .model.levels import populate
+from .model.level import Level
 from .model.world import World
 from .model.move import orbit
 from .view.render import Render
@@ -32,7 +32,8 @@ class Gameloop(object):
 
         self.world = World()
 
-        populate(self.world, 1)
+        self.level = Level(self.world)
+        self.level.load(1)
 
         self.player = Player(self.world)
         self.world.add(self.player, position=self.world.start)

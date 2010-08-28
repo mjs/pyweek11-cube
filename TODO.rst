@@ -2,36 +2,10 @@
 GAMEPLAY
 --------
 
-* Levels as declarations of locations are very difficult for humans to
-  construct. Make level text files as 'nethack style' ASCII maps, eg:
-
-    --start of level file--
-    #############
-    # s #       #
-    #   #   #   #
-    #       # e #
-    #############
-
-    ##         ##
-    # s         #
-        #   #    
-    #         e #
-    ##         ##
-    --end of level file--
-
-  Size of level is inferred on loading by:
-  + Length of first line of file (13 chars) is level length.
-  + Number of contiguous lines until first blank line (5 lines) is level width.
-  + Number of repeated blocks of such lines (here there are 2) is level height.
-    s=player start location
-    e=exit location
-
-* define a bunch of levels as text files
 * An 'end of level' method which removes everything from the world,
   gets the next level and puts the player in it. 
 * When player reaches exit, call 'end of level' method
-  (it would be nice to have multiple interconnected rooms all 'visible' at
-  once, but that might be a bit ambitious for now)
+* define a bunch of levels as text files
 
 * refactor: The logic in move.directed_move should probably be at least
   partially handled by World or Collision or somesuch.
@@ -87,6 +61,8 @@ VERY OPTIONAL or SPECULATIVE
 
 * It would be nice to have mobile lightsources within the world space. Attached
   to in-game items.
+
+* several inteconnected rooms in-game at once
 
 
 `--DONE------------------------------------------------------------`
@@ -149,4 +125,28 @@ Collision detection:
           item. When move complete, old position must be marked as unoccupied.
 
 * level generator populates levels by loading text files
+
+* Levels as declarations of locations are very difficult for humans to
+  construct. Make level text files as 'nethack style' ASCII maps, eg:
+
+    --start of level file--
+    #############
+    # s #       #
+    #   #   #   #
+    #       # e #
+    #############
+
+    ##         ##
+    # s         #
+        #   #    
+    #         e #
+    ##         ##
+    --end of level file--
+
+  Size of level is inferred on loading by:
+  + Length of first line of file (13 chars) is level length.
+  + Number of contiguous lines until first blank line (5 lines) is level width.
+  + Number of repeated blocks of such lines (here there are 2) is level height.
+    s=player start location
+    e=exit location
 

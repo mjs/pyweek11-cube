@@ -12,25 +12,23 @@ LEVEL_DIR = join(path.DATA, 'level')
 sys.path.append(LEVEL_DIR)
 
 
-def populate(world, number):
-    level = Level(number)
-    level.create(world)
-
 
 class Level(object):
 
-    def __init__(self, number):
+    def __init__(self, world):
+        self.world = world
+        self.number = None
+
+
+    def load(self, number):
         self.number = number
-
-
-    def create(self, world):
         level = __import__('level%02d' % (self.number,))
 
         blocks = self.get_blocks(level.layout)
         room_size = self.get_room_size(blocks)   
-        world.add(Room(*room_size))
+        self.world.add(Room(*room_size))
 
-        self.add_items(world, blocks)
+        self.add_items(blocks)
 
 
     def get_blocks(self, layout):
@@ -49,7 +47,13 @@ class Level(object):
         return (width, height, length)
 
 
-    def add_items(self, world, blocks):
+    def clear(self):
+        for item in self.world:
+            self.world.remove(item)
+        self.world.start = None
+
+
+    def add_items(self, blocks):
         for y, block in enumerate(blocks):
             for z, line in enumerate(block):
                 for x, char in enumerate(line):
@@ -57,17 +61,18 @@ class Level(object):
                     if char == ' ':
                         pass
                     elif char == '#':
-                        self.add_wall(world, position)
+                        self.add_wall(position)
                     elif char == 's':
-                        world.start = position
+                        self.world.start = position
                     elif char == 'e':
-                        world.add(Exit(position))
+                        self.world.add(Exit(position))
                     else:
-                        print 'unknown', repr(char)
+                        print 'unknown char %c loading level %d' % (
+                            char, self.number)
 
 
-    def add_wall(self, world, position):
-        world.add(
+    def add_wall(self, position):
+        self.world.add(
             Wall(
                 size=(1, 1, 1),
                 position=position,
