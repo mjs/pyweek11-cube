@@ -44,5 +44,6 @@ def Wall(size, position, color):
             for y in xrange(0, size[1])
             for z in xrange(0, size[2])
         ),
+        collide=True,
     )
 
