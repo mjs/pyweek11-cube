@@ -43,4 +43,5 @@ class World(object):
     def remove(self, item):
         del self.items[item.id]
         self.item_removed.fire(item)
+        item.position = None
 
