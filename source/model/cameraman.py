@@ -9,7 +9,7 @@ class CameraMan(object):
         self.amplitude = amplitude
         self.frequency = frequency
         self.center = None
-        self.last_position = None
+        self.last_position = (999,999,999)
 
 
     def __call__(self, item, dt, time):
