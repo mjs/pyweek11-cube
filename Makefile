@@ -48,3 +48,6 @@ py2exe:
 .PHONY: py2exe
 
 
+upload-pyweek-src:
+	python bin\\pyweek-upload.py -u tartley -p ad9iq42s -d "cubemaze unfinished but final" -c cubemaze-src-r106.zip -e CubeMaze -f
+
