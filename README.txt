@@ -1,8 +1,31 @@
 A game written for PyWeek #11, the 'write a game in Python in a week'
 competition. pyweek.org
 
+You have been CAUGHT! Can you escape from this fiendish trandimensional puzzle
+space?
+
+Keys:
+    W A S D - forward left right back
+    Up Down - up down, when you are granted the ability to move vertically
+              (moving vertically never actually happens)
+
 Most ideas are unfinished. It's pretty much just a cube moving around a 3D
 maze, with some funky music. :-(
+
+
+DEPENDENCIES
+------------
+
+To be able to run, first you'll need:
+
+    Windows or Linux (maybe Macs too, I haven't tried)
+    Python 2.6 or 2.7 (from python.org)
+    Pyglet 1.1.4 (easy_install or pip works, or from pyglet.org)
+        with AVBin if you want sound and music.
+
+AVBin is included in the Windows binary download of Pyglet. Otherwise you'll
+have to download it from here:
+http://code.google.com/p/avbin/downloads/list
 
 
 RUNNING THE GAME
@@ -24,34 +47,10 @@ As always for pyglet / OpenGL programs, the -O flag is important, it can
 greatly improve the framerate.
 
 
-DEPENDENCIES
-------------
-
-To be able to run, first you'll need:
-
-    Windows or Linux (maybe Macs too, I haven't tried)
-    Python 2.6 or 2.7 (from python.org)
-    Pyglet 1.1.4 (easy_install or pip works, or from pyglet.org)
-        with AVBin if you want sound and music.
-
-AVBin is included in the Windows binary download of Pyglet. Otherwise you'll
-have to download it from here:
-http://code.google.com/p/avbin/downloads/list
-
-
-THE GAME
---------
-
-You have been caught! Can you escape from this fiendish trandimensional puzzle
-space?
-
-Keys:
-    W A S D - forward left right back
-    Up Down - up down, when you are granted the ability to move vertically
-
-
 DEVELOPMENT
 -----------
+
+See the TODO.rst for future ideas.
 
 As I write, there are no tests. If I add any, then I'll be using:
 
