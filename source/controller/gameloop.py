@@ -1,5 +1,7 @@
 from __future__ import division
 
+import sys
+
 import pyglet
 from pyglet.event import EVENT_HANDLED
 from pyglet.window import Window
@@ -22,6 +24,7 @@ class Gameloop(object):
         self.window = None
         self.fpss = []
         self.time = 0.0
+        self.level = None
 
 
     def prepare(self, options):
@@ -38,8 +41,11 @@ class Gameloop(object):
             position=origin,
             update=CameraMan(self.player, (3, 2, 0)),
         )
-        self.level = Level(self)
-        self.level.next(self.world)
+        self.level_loader = Level(self)
+        success = self.start_level(1)
+        if not success:
+            print "ERROR, can't load level 1"
+            sys.exit(1)
 
         self.update(1/60)
 
@@ -72,9 +78,26 @@ class Gameloop(object):
         if self.player_at_exit():
             self.world.remove(self.player)
             pyglet.clock.schedule_once(
-                lambda *_: self.level.next(self.world), 1.0)
+                lambda *_: self.start_level(self.level + 1),
+                1.0
+            )
 
         self.window.invalid = True
+
+
+    def start_level(self, n):
+        success = self.level_loader.load(self.world, n)
+        if not success:
+            print 'No level %d' % (n,)
+            self.stop()
+            return False
+               
+        self.level = n
+        pyglet.clock.schedule_once(
+            lambda *_: self.world.add(self.player),
+            1.0,
+        )
+        return True
 
 
     def player_at_exit(self):
