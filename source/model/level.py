@@ -3,8 +3,6 @@ from os.path import join
 
 from euclid import Vector3
 
-import pyglet
-
 from ..util import color
 from ..util import path
 from .item.exit import Exit
@@ -25,18 +23,6 @@ class Level(object):
         self.number = 0
 
 
-    def next(self, world):
-        self.clear(world)
-        if not self.load(world, self.number + 1):
-            self.load(world, 1)
-        pyglet.clock.schedule_once(
-            lambda *_: world.add(
-                self.gameloop.player,
-            ),
-            1.0,
-        )
-
-
     def clear(self, world):
         items = world.items.values()
         for item in items:
@@ -44,6 +30,8 @@ class Level(object):
 
 
     def load(self, world, number):
+        self.clear(world)
+
         try:
             level = __import__('level%02d' % (number,))
         except ImportError:
