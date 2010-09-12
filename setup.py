@@ -13,19 +13,12 @@ IGNORE_EXTENSIONS = ['.pyc', '.pyo']
 def all_files(src):
     retval = []
     for (root, dirs, files) in walk(normpath(src)):
-        dirs = (
-            dirname
-            for dirname in dirs
-            if dirname not in IGNORE_DIRS
-        )
-        files = (
-            filename
-            for filename in files
-            if not any(filename.endswith(ext) for ext in IGNORE_EXTENSIONS)
-        )
+        dirs = filter(lambda d: d not in IGNORE_DIRS, dirs)
+        files = filter(
+            lambda f: not any(f.endswith(ext) for ext in IGNORE_EXTENSIONS),
+            files)
         retval.append((root, [join(root, filename) for filename in files]))
     return retval
-
 
 
 config = dict(
@@ -35,10 +28,9 @@ config = dict(
             # icon_resources=[(1, 'data\%s.ico' % (NAME,))],
         )
     ],
-    data_files=[
+    data_files=
         all_files('data') +
         all_files(join('source', 'view', 'shaders')),
-    ],
 )
 
 from pprint import pprint 
