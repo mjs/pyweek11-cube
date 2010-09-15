@@ -10,14 +10,16 @@ IGNORE_DIRS = ['.svn']
 IGNORE_EXTENSIONS = ['.pyc', '.pyo']
 
 
-def all_files(src):
+def all_files(source, dest=None):
     retval = []
-    for (root, dirs, files) in walk(normpath(src)):
+    for (root, dirs, files) in walk(normpath(source)):
         dirs = filter(lambda d: d not in IGNORE_DIRS, dirs)
         files = filter(
             lambda f: not any(f.endswith(ext) for ext in IGNORE_EXTENSIONS),
             files)
-        retval.append((root, [join(root, filename) for filename in files]))
+        if dest is None:
+            dest = source
+        retval.append((dest, [join(root, filename) for filename in files]))
     return retval
 
 
@@ -29,6 +31,7 @@ config = dict(
         )
     ],
     data_files=
+        all_files('..\lib\Microsoft.VC90.CRT', dest='Microsoft.VC90.CRT') +
         all_files('data') +
         all_files(join('source', 'view', 'shaders')),
 )
