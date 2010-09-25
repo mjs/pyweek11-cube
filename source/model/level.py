@@ -1,3 +1,4 @@
+import logging
 import sys
 from os.path import join
 
@@ -95,6 +96,6 @@ class Level(object):
                             position=position,
                         )
                     else:
-                        print 'unknown char %c loading level %d' % (
-                            char, self.number)
+                        logging.error('unknown char %c loading level %d' % (
+                            char, self.number))
 

@@ -1,5 +1,6 @@
 from __future__ import division
 
+import logging
 import sys
 
 import pyglet
@@ -30,7 +31,7 @@ class Gameloop(object):
     def prepare(self, options):
         self.window = Window(
             fullscreen=options.fullscreen,
-            vsync=not options.novsync,
+            vsync=options.vsync,
             visible=False,
             resizable=True)
         self.window.on_draw = self.draw_window
@@ -44,7 +45,7 @@ class Gameloop(object):
         self.level_loader = Level(self)
         success = self.start_level(1)
         if not success:
-            print "ERROR, can't load level 1"
+            logging.error("ERROR, can't load level 1")
             sys.exit(1)
 
         self.update(1/60)
@@ -62,6 +63,7 @@ class Gameloop(object):
     def run(self):
         pyglet.clock.schedule(self.update)
         self.window.set_visible()
+        self.window.invalid = False
         pyglet.app.run()
 
 
@@ -88,14 +90,14 @@ class Gameloop(object):
     def start_level(self, n):
         success = self.level_loader.load(self.world, n)
         if not success:
-            print 'No level %d' % (n,)
+            logging.info('No level %d' % (n,))
             self.stop()
             return False
                
         self.level = n
         pyglet.clock.schedule_once(
             lambda *_: self.world.add(self.player),
-            1.0,
+            2.0,
         )
         return True
 
@@ -107,7 +109,6 @@ class Gameloop(object):
             if dist2_to_exit < EPSILON2:
                 return True
         return False
-
 
 
     def draw_window(self):
