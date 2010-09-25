@@ -37,11 +37,10 @@ Run from the command line using:
 
 Where options are:
 
-    --novsync, disable vsync
-    --fullscreen or -f, run fullscreen instead of windowed
+    --vsync, enables vsync
+    --windows or -w, run windowed instead of fullscreen
     --print-fps, print fps to stdout on exit
     --fps, display fps on screen
-    --version, display version on stdout and exit
 
 As always for pyglet / OpenGL programs, the -O flag is important, it can
 greatly improve the framerate.
@@ -52,13 +51,7 @@ DEVELOPMENT
 
 See the TODO.rst for future ideas.
 
-As I write, there are no tests. If I add any, then I'll be using:
-
-    unittest2 (only required for Python2.6, is built in to Python2.7)
-    nose
-
-Run tests using the command line 'nosetests'. Nose is just used for test
-discovery (unittest2 discovery has some wrinkles for me)
+The program spits out a logfile 'CaughtCube-debug.log'.
 
 Also I have some simple commands stored in a Makefile, which I run under Linux
 or under Windows with Cygwin binaries on the PATH. If you're on Windows but

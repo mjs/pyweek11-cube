@@ -1,11 +1,10 @@
-
 from os.path import join
 
 import pyglet
 from pyglet.gl import gl
 
-from ..util.color import Color
 from ..util import path
+from ..util.color import Color
 from .glyph import Glyph
 from .modelview import ModelView
 from .projection import Projection
@@ -89,7 +88,6 @@ class Render(object):
                 len(glyph.glindices),
                 type_to_enum[glyph.glindex_type],
                 glyph.glindices)
-
             gl.glPopMatrix()
 
 
