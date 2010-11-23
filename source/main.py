@@ -13,7 +13,7 @@ def run_game():
         filemode='w',
         level=logging.DEBUG,
     )
-    logging.debug('\n%s\n%s v%s' % ('-' * 79, name, version,))
+    logging.debug('%s v%s' % (name, version,))
 
     options = Options(sys.argv)
     try:
